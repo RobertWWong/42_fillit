@@ -12,7 +12,7 @@ all: $(NAME)
 $(NAME): $(SRC)
 	cd ./srcs/libft && make -f Makefile
 	mv ./srcs/libft/libft.a .
-	$(CC) $(CFLAGS) -c $(SRC)
+	$(CC) -g $(CFLAGS) -c $(SRC)
 	$(CC) $(MAIN_FILE) -o $(NAME) $(OBJ) ./libft.a
 
 clean:
@@ -30,7 +30,7 @@ run: all
 re: fclean all
 
 rt:
-	gcc $(MAIN_FILE) $(OBJ) -L. -lft
+	gcc -g $(MAIN_FILE) $(OBJ) -L. -lft
 	./$(NAME) ./input_files/invalid_sample.fillit
 	./$(NAME) ./input_files/valid_sample.fillit
 
