@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetrimino_checker.c                                :+:      :+:    :+:   */
+/*   data_getter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -58,16 +58,18 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 	char	**tmp;
 	int		i;
 	int		j;
+	int		count;
 
 	tmp = ft_strsplit(data, '\n');
 	i = 0;
 	j = 0;
 	while (tmp[j])
 	{
-		tetriminoes[i] = tmp[j];
-		tetrimin
+		tetriminoes[i] = ft_strnew(21);
+		count = 0;
+		while (count++ < 4)
+			ft_strcat(tetriminoes[i], tmp[j++]);
 		i++;
-		j = j + 21;
 	}
-	return (tetriminioes);
+	return (tetriminoes);
 }
