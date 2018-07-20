@@ -1,6 +1,5 @@
 #include "../includes/ft_fillit.h"
-#include "../includes/libft.h"
-
+#include "../libft/libft.h"
 #include "../includes/tetrimino.h"
 #include <stdio.h>
 
