@@ -10,21 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tetrimino.h"
-
-void	ft_putstr(char *s)
-{
-	while (*s)
-		write(1, s++, 1);	
-}
+#include "../includes/tetrimino.h"
 
 int		count_char(int file_desc)
 {
 	int		size;
 	char	characters[22];
-	int		ret;
 
-	size = 0;		
+	size = 0;
 	while (read(file_desc, characters, 20) > 0)
 	{
 		size = size + 20;
@@ -38,16 +31,15 @@ char	*get_data(char *file_name, char *data)
 {
 	int		file_desc;
 	int		size;
-	
+
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
-		return (NULL);		
+		return (NULL);
 	size = count_char(file_desc);
 	close(file_desc);
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
-		return (NULL);		
+		return (NULL);
 	data = (char *)malloc(sizeof(char) * (size + 1));
 	if (read(file_desc, data, size) < 0)
 		return (NULL);
 	return (data);
 }
-

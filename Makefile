@@ -1,13 +1,13 @@
 CC =gcc
 SRC_DIR =srcs/
 INCLUDE=includes/
-CFLAGS =-I$(INCLUDE) -Wall -Wextra -Werror
+CFLAGS =-I $(INCLUDE) -Wall -Wextra -Werror
 OUTPUT = fillit
-SRC := ./test/test_main.c $(wildcard $(SRC_DIR)/*.c)
+SRC := ./test/test_main.c $(filter-out main.c file_io.c ,$(wildcard $(SRC_DIR)/*.c))
 OBJ := $(SRC:.c=.o)
 
 all: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $(OUTPUT) -L ./libft -lft
+	$(CC) $(CFLAGS) $^ -o $(OUTPUT) -L ./libfta -lft
 
 clean:
 	rm -f *.o $(SRC_DIR)*.o *~ core
@@ -21,6 +21,6 @@ run: all
 re: fclean all
 
 rt:
-	gcc ./test/test_main.c -L ./libft -lft -o $(OUTPUT)
+	./$(OUTPUT) ./input_files/invalid_sample.fillit
 
 .PHONY: clean fclean re

@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-void	ft_putstr(char *s);
 int		count_char(int file_desc);
 char	*get_data(char *file_name, char *data);
 int		basic_validate(char *data);

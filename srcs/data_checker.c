@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tetrimino.h"
+#include "../includes/tetrimino.h"
 
 int		basic_validate(char	*data)
 {
