@@ -18,5 +18,6 @@ int		main(int argc, char **argv)
 		}
 		printf("%d\n", basic_validate(data));
 	}
+	printf("oh yes");
 	return (0);
 }

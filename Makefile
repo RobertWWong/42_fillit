@@ -3,7 +3,8 @@ SRC_DIR =srcs/
 INCLUDE=includes/
 CFLAGS =-I $(INCLUDE) -Wall -Wextra -Werror
 OUTPUT = fillit
-SRC := ./test/test_main.c $(filter-out main.c file_io.c ,$(wildcard $(SRC_DIR)/*.c))
+MAIN = ./test/test_main.c
+SRC := $(MAIN) $(filter-out main.c file_io.c ,$(wildcard $(SRC_DIR)/*.c))	#this will exclude main for now
 OBJ := $(SRC:.c=.o)
 
 all: $(OBJ)
