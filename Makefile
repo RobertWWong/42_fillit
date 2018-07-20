@@ -10,14 +10,19 @@ OBJ = $(patsubst srcs/%.c, %.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(SRC)
+	cd ./srcs/libft && make -f Makefile
+	mv ./srcs/libft/libft.a .
 	$(CC) $(CFLAGS) -c $(SRC)
-	$(CC) $(MAIN_FILE) -o $(NAME) $(OBJ) ./libft/libft.a
+	$(CC) $(MAIN_FILE) -o $(NAME) $(OBJ) ./libft.a
 
 clean:
-	rm -f *.o $(SRC_DIR)*.o *~ core
+	cd ./srcs/libft && make clean
+	rm -f *.o $(SRC_DIR)*.o test/*.o
 
 fclean: clean
+	cd srcs/libft && make fclean
 	rm -f $(NAME)
+	rm -f ./libft.a
 
 run: all
 	./$(NAME)
@@ -25,7 +30,7 @@ run: all
 re: fclean all
 
 rt:
-	gcc $(MAIN_FILE) $(OBJ) -L ./libft -lft
+	gcc $(MAIN_FILE) $(OBJ) -L. -lft
 	./$(NAME) ./input_files/invalid_sample.fillit
 	./$(NAME) ./input_files/valid_sample.fillit
 
