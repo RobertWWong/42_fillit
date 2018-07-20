@@ -6,12 +6,11 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:06:04 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 14:07:14 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 14:55:04 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tetrimino.h"
-#include "libft.h"
+#include "./includes/tetrimino.h"
 
 int		main(int argc, char **argv)
 {

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetrimino_checker.c                                :+:      :+:    :+:   */
+/*   data_getter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/19 08:27:29 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 14:20:58 by zwang            ###   ########.fr       */
+/*   Created: 2018/07/20 14:41:39 by zwang             #+#    #+#             */
+/*   Updated: 2018/07/20 14:54:14 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tetrimino.h"
-#include "libft.h"
+#include "../includes/tetrimino.h"
 
 int		count_char(int file_desc)
 {
@@ -51,17 +50,19 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 	char	**tmp;
 	int		i;
 	int		j;
+	int		count;
 
 	tmp = ft_strsplit(data, '\n');
 	i = 0;
 	j = 0;
 	while (tmp[j])
 	{
-		tetriminoes[i] = tmp[j];
-		tetrimin
+		tetriminoes[i] = ft_strnew(21);
+		count = 0;
+		while (count++ < 4)
+			ft_strcat(tetriminoes[i], tmp[j++]);
 		i++;
-		j = j + 21;
 	}
-	return (tetriminioes);
+	return (tetriminoes);
 }
 

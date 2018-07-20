@@ -6,11 +6,11 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 13:53:05 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 14:55:29 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tetrimino.h"
+#include "../includes/tetrimino.h"
 
 int		check_block(char *data, int *i)
 {
