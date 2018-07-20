@@ -14,6 +14,5 @@ typedef struct		s_tetrominoes
 
 int					solve_smallest_sq();
 int					solve_smallest_sq();
-int					();
 
 #endif

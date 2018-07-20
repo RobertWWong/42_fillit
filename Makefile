@@ -31,7 +31,7 @@ re: fclean all
 
 rt:
 	gcc $(MAIN_FILE) $(OBJ) -L. -lft
-	./$(NAME) ./input_files/invalid_sample.fillit
+	#./$(NAME) ./input_files/invalid_sample.fillit
 	./$(NAME) ./input_files/valid_sample.fillit
 
 .PHONY: clean fclean re

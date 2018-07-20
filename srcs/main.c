@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_main.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/20 15:17:46 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 15:18:18 by zwang            ###   ########.fr       */
+/*   Created: 2018/07/20 15:22:27 by zwang             #+#    #+#             */
+/*   Updated: 2018/07/20 15:27:29 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_fillit.h"
-#include "../includes/libft.h"
 #include "../includes/tetrimino.h"
-#include <stdio.h>
 
 int		main(int argc, char **argv)
 {

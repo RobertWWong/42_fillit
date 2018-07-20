@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 08:27:29 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 14:35:58 by rowong           ###   ########.fr       */
+/*   Updated: 2018/07/20 15:19:16 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,17 @@ char	*get_data(char *file_name, char *data)
 
 char	**get_tetriminoes(char *data, char **tetriminoes)
 {
-	char	**tmp;
 	int		i;
 	int		j;
-	int		count;
 
-	tmp = ft_strsplit(data, '\n');
 	i = 0;
 	j = 0;
-	while (tmp[j])
+	while (data[j])
 	{
 		tetriminoes[i] = ft_strnew(21);
-		count = 0;
-		while (count++ < 4)
-			ft_strcat(tetriminoes[i], tmp[j++]);
+		ft_strncpy(tetriminoes[i], &data[j], 20);
 		i++;
+		j = j + 21;
 	}
 	return (tetriminoes);
 }
