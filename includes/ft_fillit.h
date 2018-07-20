@@ -5,11 +5,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct		s_terminos
+typedef struct		s_tetrominoes
 {
 	int				height;
 	int				width;
 	int				shape[2];
-}					t_terminos;
+}					t_tetrominoes;
+
+int					solve_smallest_sq();
+int					solve_smallest_sq();
+int					();
 
 #endif

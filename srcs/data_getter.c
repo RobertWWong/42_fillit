@@ -12,6 +12,9 @@
 
 #include "../includes/tetrimino.h"
 
+/*
+
+*/
 int		count_char(int file_desc)
 {
 	int		size;
