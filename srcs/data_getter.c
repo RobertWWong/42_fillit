@@ -13,7 +13,8 @@
 #include "../includes/tetrimino.h"
 
 /*
-
+** Read 21 char bytes at a time from to a char buffer to determine the size
+** of the file read.
 */
 int		count_char(int file_desc)
 {
@@ -30,6 +31,11 @@ int		count_char(int file_desc)
 	return (size);
 }
 
+/*
+** Read from a file into a string buffer the contents of the file
+** Allocates memory to a string data pointer before reading in the entirety of
+** the file to pointer.
+*/
 char	*get_data(char *file_name, char *data)
 {
 	int		file_desc;
