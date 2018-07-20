@@ -6,17 +6,12 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 08:27:29 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 10:46:05 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 14:20:58 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetrimino.h"
-
-void	ft_putstr(char *s)
-{
-	while (*s)
-		write(1, s++, 1);	
-}
+#include "libft.h"
 
 int		count_char(int file_desc)
 {
@@ -49,5 +44,24 @@ char	*get_data(char *file_name, char *data)
 	if (read(file_desc, data, size) < 0)
 		return (NULL);
 	return (data);
+}
+
+char	**get_tetriminoes(char *data, char **tetriminoes)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+
+	tmp = ft_strsplit(data, '\n');
+	i = 0;
+	j = 0;
+	while (tmp[j])
+	{
+		tetriminoes[i] = tmp[j];
+		tetrimin
+		i++;
+		j = j + 21;
+	}
+	return (tetriminioes);
 }
 

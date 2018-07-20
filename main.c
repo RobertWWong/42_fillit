@@ -6,16 +6,19 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:06:04 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 10:29:15 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 14:07:14 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetrimino.h"
-#include <stdio.h>
+#include "libft.h"
 
 int		main(int argc, char **argv)
 {
 	char	*data;
+	char	**tetriminoes;
+	int		i;
+	int		j;
 
 	if (argc == 2)
 	{
@@ -24,7 +27,10 @@ int		main(int argc, char **argv)
 			ft_putstr("Error");
 			return (1);
 		}
-		printf("%d\n", basic_validate(data));
+		tetriminoes = get_tetriminoes(data, tetriminoes);
+		i = 0;
+		while (tetriminoes[i])
+			ft_putstr(tetriminoes[i++]);
 	}
 	return (0);
 }
