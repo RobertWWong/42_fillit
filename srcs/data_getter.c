@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 08:27:29 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 15:19:16 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 15:54:33 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,29 @@ char	*get_data(char *file_name, char *data)
 	return (data);
 }
 
+int		ft_strcount(char const *s, char c)
+{
+	int	num;
+
+	if (!(*s))
+		return (0);
+	num = (*s == c) ? 0 : 1;
+	while (*s)
+	{
+		if (*s == c)
+		{
+			while (*s == c)
+				s++;
+			num++;
+		}
+		else
+			s++;
+	}
+	if (*(s - 1) == c)
+		num--;
+	return (num);
+}
+
 char	**get_tetriminoes(char *data, char **tetriminoes)
 {
 	int		i;
@@ -65,7 +88,8 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 		tetriminoes[i] = ft_strnew(21);
 		ft_strncpy(tetriminoes[i], &data[j], 20);
 		i++;
-		j = j + 21;
+		j = j + 21;	
 	}
+	tetriminoes[i] = NULL;
 	return (tetriminoes);
 }
