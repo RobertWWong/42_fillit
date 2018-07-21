@@ -24,13 +24,6 @@
 # include "libft.h"
 # include <stdio.h>
 
-
-int						count_char(int file_desc);
-char					*get_data(char *file_name, char *data);
-char					**get_tetriminoes(char *data, char **tetriminoes);
-int						basic_validate(char *data);
-int						advanced_validate(char **tetriminoes);	//not used within data checker
-
 typedef struct			s_point
 {
 	int					x;
@@ -41,17 +34,24 @@ typedef struct			s_point
 struct will have height and width to help with board size
 it also contains an array of points, detailing it's location and shape to be
 no idea why we have a pointer to another tetrimino
+
+NEED TO FREE TETRIMINO SOMETIME IN LIFE
 */
 typedef struct			s_tetrimino
 {
 	int					height;
 	int					width;
 	t_point				points[4];
-	// t_point			*upper;
-	// t_point			*lower;
-	// t_point			*left;
-	// t_point			*right;
 	struct s_tetrimino	*next;
 }						t_tetrimino;
+
+int						count_char(int file_desc);
+char					*get_data(char *file_name, char *data);
+char					**get_tetriminoes(char *data, char **tetriminoes);
+int						basic_validate(char *data);
+int						advanced_validate(char **tetriminoes);	//not used within data checker
+t_tetrimino				*form_tetrimino(char *tetrimino);
+
+
 
 #endif

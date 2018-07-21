@@ -12,116 +12,73 @@
 
 #include "../includes/tetrimino.h"
 
-t_point	*find_upper_point(char **tetro, t_point *upper)
+void		shift_all_points(t_tetrimino *item, int min, int max)
 {
-	int		i;
-	int		j;
+	int i;
 
-	i = 0;
-	j = 0;
-	while (i < 5)
+	i = -1;
+	while (++i < 4)
 	{
-		while (j < 5)
+		(item->points[i]).x -= min;
+		(item->points[i]).y -= max;
+		printf("our points row=%d  col=%d\n",(item->points[i]).x, (item->points[i]).y);
+	}
+}
+
+void		create_points(t_tetrimino *item, char **tetro)
+{
+	int i;
+	int j;
+	int min_row;
+	int min_col;
+	int point;
+
+	i = -1;
+	min_row = 10;
+	min_col = 10;
+	point = 0;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
 		{
 			if (tetro[i][j] == '#')
 			{
-				upper = (t_point *)malloc(sizeof(t_point));
-				upper->x = j;
-				upper->y = i;
+				(item->points[point]).x = i;
+				(item->points[point++]).y = j;
+				min_row = i < min_row ? i : min_row;
+				min_col = j < min_col ? j : min_col;
 			}
-			j++;
 		}
-		i++;
 	}
-	return (upper);
+	shift_all_points(item, min_row, min_col);
 }
-
-t_point	*find_lower_point(char **tetro, t_point *lower)
-{
-	int		i;
-	int		j;
-
-	i = 4;
-	j = 0;
-	while (i >= 0)
-	{
-		while (j < 5)
-		{
-			if (tetro[i][j] == '#')
-			{
-				lower = (t_point *)malloc(sizeof(t_point));
-				lower->x = j;
-				lower->y = i;
-			}
-			j++;
-		}
-		i--;
-	}
-	return (lower);
-}
-
-t_point	*find_left_point(char **tetro, t_point *left)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (j < 5)
-	{
-		while (i < 5)
-		{
-			if (tetro[i][j] == '#')
-			{
-				left = (t_point *)malloc(sizeof(t_point));
-				left->x = j;
-				left->y = i;
-			}
-			i++;
-		}
-		j++;
-	}
-	return (left);
-}
-
-t_point	*find_right_point(char **tetro, t_point *right)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 4;
-	while (j >= 4)
-	{
-		while (i < 5)
-		{
-			if (tetro[i][j] == '#')
-			{
-				right = (t_point *)malloc(sizeof(t_point));
-				right->x = j;
-				right->y = i;
-			}
-			i++;
-		}
-		j--;
-	}
-	return (right);
-}
-
+/*
+Algorithm for moving pieces to top left corner
+find first contact with a # block and make a point struct for it
+mark its row and col index
+check rest of block to determine min row and col indexs
+also assign coordinates to these blocks
+subtract min row and col value from each point
+*/
 t_tetrimino	*form_tetrimino(char *tetrimino)
 {
 	char		**tetro;
+	int			i;
 	// int			height;		//never used
 	// int			width;
 	t_tetrimino	*item;
 
-	tetro = ft_strsplit(tetrimino, '\n');
 	item = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-	item->upper = find_upper_point(tetro, item->upper);
-	item->lower = find_lower_point(tetro, item->lower);
-	item->left = find_left_point(tetro, item->left);
-	item->right = find_left_point(tetro, item->right);
-	item->height = item->lower->y - item->upper->y;
-	item->width = item->right->x - item->left->x;
+	i = -1;
+	while (++i < 4)
+	{
+		item->points[i].x = 0;
+		item->points[i].y = 0;
+	}
+
+	tetro = ft_strsplit(tetrimino, '\n');
+	printf("our tetrio \n%s\n", tetrimino);
+	create_points(item, tetro);
 	return (item);
 }
