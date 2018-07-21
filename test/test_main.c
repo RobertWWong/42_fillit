@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 15:22:27 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 15:53:32 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 16:46:18 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@ int		main(int argc, char **argv)
 			ft_putstr("Error");
 			return (1);
 		}
-		lines = ft_strcount(data, '\n');
-		tetriminoes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
-		tetriminoes = get_tetriminoes(data, tetriminoes);
-		i = 0;
-		while (tetriminoes[i])
+		if (!basic_validate(data))
+			ft_putstr("Invalid File");
+		else
 		{
-			ft_putstr(tetriminoes[i++]);
-			ft_putstr("\n");
+			lines = ft_strcount(data, '\n');
+			tetriminoes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+			tetriminoes = get_tetriminoes(data, tetriminoes);
+			i = 0;
+			while (tetriminoes[i])
+			{
+				ft_putstr(tetriminoes[i++]);
+				ft_putstr("\n");
+			}
 		}
 	}
 	return (0);

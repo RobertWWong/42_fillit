@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 14:55:29 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/20 17:41:55 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,42 @@ int		basic_validate(char *data)
 	return (1);
 }
 
-/*
-int		advanced_validate(char *data)
+int		check_tetrimino(char *tetrimino)
 {
-*/	
+	int		i;
+	int		j;
+	int		*list;
+
+	i = 0;
+	j = 0;
+	list = (int *)malloc(size(int) * 4);
+	while (j < 4)
+	{
+		if (tetrimino[i] == '#' && i - 5 >= 0)
+			list += (tetrimino[i - 5] == '#') ? 1 : 0;
+		if (tetrimino[i] == '#' && i + 5 <= 19)
+			list += (tetrimino[i + 5] == '#') ? 1 : 0;
+		if (tetrimino[i] == '#' && i > 0)
+			list += (tetrimino[i - 1] == '#') ? 1 : 0;
+		if (tetrimino[i] == '#' && i < 19)
+			list += (tetrimino[i + 1] == '#') ? 1 : 0;
+		j++;
+	}
+	if (list[0] + list[1] + list[2] + list[3] >= 6)
+		return (1);
+	return (0);
+}
+
+int		advanced_validate(char **tetriminoes)
+{
+	int		i;
+
+	i = 0;
+	while (tetriminoes[i])
+	{
+		if (!check_tetrimino(tetriminoes[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
