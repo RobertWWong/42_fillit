@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/21 13:52:53 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/21 13:56:59 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		check_tetrimino(char *tetrimino)
 	int		*list;
 
 	i = 0;
-	list = (int *)malloc(size(int) * 4);
+	j = 0;
+	list = (int *)malloc(sizeof(int) * 4);
 	while (j < 4 && tetrimino[i])
 	{
 		if (tetrimino[i] == '#' && i - 5 >= 0)

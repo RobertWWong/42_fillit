@@ -8,6 +8,7 @@ SRC := $(filter-out main.c ,$(wildcard $(SRC_DIR)*.c))
 OBJ = $(patsubst srcs/%.c, %.o, $(SRC))
 BAD = $(wildcard input_files/errors/err*)
 GOOD = $(wildcard input_files/correct/val*)
+
 all: $(NAME)
 
 $(NAME): $(SRC)
