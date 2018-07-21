@@ -6,7 +6,8 @@ NAME = fillit
 MAIN_FILE = ./test/test_main.c
 SRC := $(filter-out main.c file_io.c ,$(wildcard $(SRC_DIR)*.c))
 OBJ = $(patsubst srcs/%.c, %.o, $(SRC))
-
+BAD = $(wildcard input_files/errors/err*)
+GOOD = $(wildcard input_files/correct/val*)
 all: $(NAME)
 
 $(NAME): $(SRC)
@@ -29,9 +30,13 @@ run: all
 
 re: fclean all
 
+rerr:
+	gcc -g $(MAIN_FILE) $(OBJ) -L. -lft
+	./$(NAME) $(BAD)
+	./$(NAME) $(GOOD)
+
 rt:
 	gcc -g $(MAIN_FILE) $(OBJ) -L. -lft
-	./$(NAME) ./input_files/invalid_sample.fillit
-	./$(NAME) ./input_files/valid_sample.fillit
-
+	./$(NAME) input_files/errors/error_9
+	./$(NAME)	input_files/correct/valid_12
 .PHONY: clean fclean re

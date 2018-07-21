@@ -19,12 +19,14 @@ int		main(int argc, char **argv)
 	int		i;
 	int		lines;
 
-	if (argc == 2)
+	argv++;
+	ft_putstr(ft_itoa(argc));
+	if (argc >= 2)
 	{
-		if (!(data = get_data(argv[1], data)))
+		if (!(data = get_data(*argv, data)))
 		{
 			ft_putstr("Error");
-			return (1);
+			return (0);
 		}
 		if (!basic_validate(data))
 			ft_putstr("Invalid File");
@@ -40,6 +42,7 @@ int		main(int argc, char **argv)
 				ft_putstr("\n");
 			}
 		}
+		argc--;
 	}
 	return (0);
 }
