@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/tetrimino.h"
-#include <stdio.h>
 /*
 ** Read 21 char bytes at a time from to a char buffer to determine the size
 ** of the file read.
@@ -55,7 +54,6 @@ char	*get_data(char *file_name, char *data)
 		return (NULL);
 	}
 	close(file_desc);
-
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
 		return (NULL);
 	data = (char *)malloc(sizeof(char) * (size + 1));

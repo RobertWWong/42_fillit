@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	{
 		if (!(data = get_data(*argv, data)))
 		{
-			ft_putstr("Error");
+			ft_putstr("Error\n");
 			return (0);
 		}
 		if (!basic_validate(data))
