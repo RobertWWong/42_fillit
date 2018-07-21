@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 17:41:55 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/21 13:52:53 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,20 @@ int		check_tetrimino(char *tetrimino)
 	int		*list;
 
 	i = 0;
-	j = 0;
 	list = (int *)malloc(size(int) * 4);
-	while (j < 4)
+	while (j < 4 && tetrimino[i])
 	{
 		if (tetrimino[i] == '#' && i - 5 >= 0)
-			list += (tetrimino[i - 5] == '#') ? 1 : 0;
+			list[j] += (tetrimino[i - 5] == '#') ? 1 : 0;
 		if (tetrimino[i] == '#' && i + 5 <= 19)
-			list += (tetrimino[i + 5] == '#') ? 1 : 0;
+			list[j] += (tetrimino[i + 5] == '#') ? 1 : 0;
 		if (tetrimino[i] == '#' && i > 0)
-			list += (tetrimino[i - 1] == '#') ? 1 : 0;
+			list[j] += (tetrimino[i - 1] == '#') ? 1 : 0;
 		if (tetrimino[i] == '#' && i < 19)
-			list += (tetrimino[i + 1] == '#') ? 1 : 0;
-		j++;
+			list[j] += (tetrimino[i + 1] == '#') ? 1 : 0;
+		if (tetrimino[i] == '#')
+			j++;
+		i++;
 	}
 	if (list[0] + list[1] + list[2] + list[3] >= 6)
 		return (1);
