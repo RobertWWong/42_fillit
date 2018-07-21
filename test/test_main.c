@@ -20,7 +20,6 @@ int		main(int argc, char **argv)
 	int		lines;
 
 	argv++;
-	ft_putstr(ft_itoa(argc));
 	if (argc >= 2)
 	{
 		if (!(data = get_data(*argv, data)))
