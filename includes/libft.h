@@ -82,7 +82,7 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
-
+int					ft_strcount(char const *s, char c);
 t_list				*ft_lstnew(const void *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void*, size_t));

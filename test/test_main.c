@@ -42,6 +42,11 @@ int		main(int argc, char **argv)
 					ft_putstr(tetriminoes[i++]);
 					ft_putstr("\n");
 				}
+				t_tetrimino *test = malloc(sizeof(t_tetrimino)*1);
+				test = form_tetrimino(tetriminoes[0]);
+				test = form_tetrimino(tetriminoes[1]);
+				test = form_tetrimino(tetriminoes[2]);
+
 			}
 		}
 		argc--;

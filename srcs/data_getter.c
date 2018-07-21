@@ -63,28 +63,6 @@ char	*get_data(char *file_name, char *data)
 	return (data);
 }
 
-int		ft_strcount(char const *s, char c)
-{
-	int	num;
-
-	if (!(*s))
-		return (0);
-	num = (*s == c) ? 0 : 1;
-	while (*s)
-	{
-		if (*s == c)
-		{
-			while (*s == c)
-				s++;
-			num++;
-		}
-		else
-			s++;
-	}
-	if (*(s - 1) == c)
-		num--;
-	return (num);
-}
 
 char	**get_tetriminoes(char *data, char **tetriminoes)
 {
@@ -103,5 +81,3 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 	tetriminoes[i] = NULL;
 	return (tetriminoes);
 }
-
-

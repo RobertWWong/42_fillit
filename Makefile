@@ -31,6 +31,13 @@ run: all
 
 re: fclean all
 
+nore:
+	rm -f $(NAME)
+	rm -f *.o ./srcs/*.o ./test/*.o
+
+do: nore all
+
+	
 rerr:
 	gcc -g $(MAIN_FILE) $(OBJ) -L. -lft
 	./$(NAME) $(BAD)

@@ -66,7 +66,7 @@ int		check_tetrimino(char *tetrimino)
 
 	i = 0;
 	j = 0;
-	ft_bzero((void*)list, 4);
+	ft_bzero((void *)list, 4);
 	while (j < 4 && tetrimino[i])
 	{
 		if (tetrimino[i] == '#' && i - 5 >= 0)
