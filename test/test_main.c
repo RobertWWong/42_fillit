@@ -19,12 +19,14 @@ int		main(int argc, char **argv)
 	int		i;
 	int		lines;
 
-	if (argc == 2)
+	argv++;
+	ft_putstr(ft_itoa(argc));
+	if (argc >= 2)
 	{
-		if (!(data = get_data(argv[1], data)))
+		if (!(data = get_data(*argv, data)))
 		{
 			ft_putstr("Error");
-			return (1);
+			return (0);
 		}
 		lines = ft_strcount(data, '\n');
 		tetriminoes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
@@ -35,6 +37,7 @@ int		main(int argc, char **argv)
 			ft_putstr(tetriminoes[i++]);
 			ft_putstr("\n");
 		}
+		argc--;
 	}
 	return (0);
 }

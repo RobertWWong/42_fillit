@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/tetrimino.h"
-
+#include <stdio.h>
 /*
 ** Read 21 char bytes at a time from to a char buffer to determine the size
 ** of the file read.
@@ -24,9 +24,14 @@ int		count_char(int file_desc)
 	size = 0;
 	while (read(file_desc, characters, 20) > 0)
 	{
+
 		size = size + 20;
 		if (read(file_desc, characters, 1) > 0)
 			size++;
+		else
+			return (size);
+		if (characters[0] != '\n')
+			return (-1);
 	}
 	return (size);
 }
@@ -43,8 +48,14 @@ char	*get_data(char *file_name, char *data)
 
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
 		return (NULL);
-	size = count_char(file_desc);
+
+	if ((size = count_char(file_desc)) < 0)
+	{
+		close(file_desc);
+		return (NULL);
+	}
 	close(file_desc);
+
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
 		return (NULL);
 	data = (char *)malloc(sizeof(char) * (size + 1));
@@ -88,7 +99,7 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 		tetriminoes[i] = ft_strnew(21);
 		ft_strncpy(tetriminoes[i], &data[j], 20);
 		i++;
-		j = j + 21;	
+		j = j + 21;
 	}
 	tetriminoes[i] = NULL;
 	return (tetriminoes);
