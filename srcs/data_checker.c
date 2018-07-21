@@ -100,6 +100,5 @@ int		advanced_validate(char **tetriminoes)
 			return (0);
 		i++;
 	}
-	printf("we're golden!\n");
 	return (1);
 }
