@@ -12,13 +12,13 @@
 
 #include "../includes/tetrimino.h"
 
-t_vertex	*find_upper_vertex(char **tetro, t_vertex upper)
+t_vertex	*find_upper_vertex(char **tetro, t_vertex *upper)
 {
 	int		i;
 	int		j;
-	
+
 	i = 0;
-	j = 0;	
+	j = 0;
 	while (i < 5)
 	{
 		while (j < 5)
@@ -36,7 +36,7 @@ t_vertex	*find_upper_vertex(char **tetro, t_vertex upper)
 	return (upper);
 }
 
-t_vertex	*find_lower_vertex(char **tetro, t_vertex lower)
+t_vertex	*find_lower_vertex(char **tetro, t_vertex *lower)
 {
 	int		i;
 	int		j;
@@ -60,7 +60,7 @@ t_vertex	*find_lower_vertex(char **tetro, t_vertex lower)
 	return (lower);
 }
 
-t_vertex	*find_left_vertex(char **tetro, t_vertex left)
+t_vertex	*find_left_vertex(char **tetro, t_vertex *left)
 {
 	int		i;
 	int		j;
@@ -84,7 +84,7 @@ t_vertex	*find_left_vertex(char **tetro, t_vertex left)
 	return (left);
 }
 
-t_vertex	*find_right_vertex(char **tetro, t_vertex right)
+t_vertex	*find_right_vertex(char **tetro, t_vertex *right)
 {
 	int		i;
 	int		j;
@@ -111,8 +111,8 @@ t_vertex	*find_right_vertex(char **tetro, t_vertex right)
 t_tetrimino	*form_tetrimino(char *tetrimino)
 {
 	char		**tetro;
-	int			height;
-	int			width;
+	// int			height;		//never used
+	// int			width;
 	t_tetrimino	*item;
 
 	tetro = ft_strsplit(tetrimino, '\n');

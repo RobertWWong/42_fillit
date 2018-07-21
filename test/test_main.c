@@ -20,7 +20,6 @@ int		main(int argc, char **argv)
 	int		lines;
 
 	argv++;
-	ft_putstr(ft_itoa(argc));
 	if (argc >= 2)
 	{
 		if (!(data = get_data(*argv, data)))
@@ -36,10 +35,16 @@ int		main(int argc, char **argv)
 			tetriminoes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
 			tetriminoes = get_tetriminoes(data, tetriminoes);
 			i = 0;
-			while (tetriminoes[i])
+			ft_putstr("Is this even working?\n");
+			if (advanced_validate(tetriminoes))
 			{
-				ft_putstr(tetriminoes[i++]);
-				ft_putstr("\n");
+				printf("wtf = %d\n",i );
+				while (tetriminoes[i])
+				{
+					printf("count = %d\n", i);
+					ft_putstr(tetriminoes[i++]);
+					ft_putstr("\n");
+				}
 			}
 		}
 		argc--;

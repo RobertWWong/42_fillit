@@ -37,7 +37,7 @@ rerr:
 	./$(NAME) $(GOOD)
 
 rt:
-	gcc -g $(MAIN_FILE) $(OBJ) -L. -lft
+	gcc -g $(MAIN_FILE) $(OBJ) -o $(NAME) -L. -lft
 	./$(NAME) input_files/errors/error_9
 	./$(NAME)	input_files/correct/valid_12
 .PHONY: clean fclean re

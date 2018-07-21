@@ -56,42 +56,52 @@ int		basic_validate(char *data)
 	return (1);
 }
 
-int		check_tetrimino(char *tetrimino)
+/*
+** Not working at the moment
+** i doesn't increment, we will benefit from a dfs with 2d array boolean count
+*/
+int		check_tetrimino(char **tetrimino)
 {
 	int		i;
 	int		j;
-	int		*list;
+	int		map[4][4];
 
 	i = 0;
-	j = 0;
-	list = (int *)malloc(sizeof(int) * 4);
-	while (j < 4)
+	//init a 2d int array to 0
+	while (i < 4)
+		ft_bzero((void*)map[i++], 4);
+	i = 0;
+	while (i < 4)
 	{
-		if (tetrimino[i] == '#' && i - 5 >= 0)
-			list += (tetrimino[i - 5] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#' && i + 5 <= 19)
-			list += (tetrimino[i + 5] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#' && i > 0)
-			list += (tetrimino[i - 1] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#' && i < 19)
-			list += (tetrimino[i + 1] == '#') ? 1 : 0;
-		j++;
+		j = 0;
+		while (j < 4)
+		{
+			if (tetrimino[i][j] == '#')
+				
+		}
 	}
-	if (list[0] + list[1] + list[2] + list[3] >= 6)
-		return (1);
+
 	return (0);
 }
 
 int		advanced_validate(char **tetriminoes)
 {
 	int		i;
+	int		j;
+	int		sides;
+	char	**tetri;
 
+	sides = 0;
 	i = 0;
 	while (tetriminoes[i])
 	{
-		if (!check_tetrimino(tetriminoes[i]))
+		printf("%s\n", tetriminoes[i]);
+		tetri = ft_strsplit(tetriminoes[i], '\n');
+		if (!check_tetrimino(tetri))
 			return (0);
+		ft_strdel(tetri);
 		i++;
 	}
+	printf("we're golden!\n");
 	return (1);
 }
