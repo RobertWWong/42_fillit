@@ -6,12 +6,12 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 08:27:29 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/20 15:54:33 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/21 11:34:33 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/tetrimino.h"
-#include <stdio.h>
+
 /*
 ** Read 21 char bytes at a time from to a char buffer to determine the size
 ** of the file read.
@@ -104,3 +104,5 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 	tetriminoes[i] = NULL;
 	return (tetriminoes);
 }
+
+
