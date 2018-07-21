@@ -1,16 +1,19 @@
 # Prerequisites
 *.d
 *._*
+pdf*
+
 # Object files
 *.o
 *.ko
 *.obj
 *.elf
-pdf*
+
 # Linker output
 *.ilk
 *.map
 *.exp
+*.a
 
 # Precompiled Headers
 *.gch
@@ -34,6 +37,7 @@ pdf*
 *.i*86
 *.x86_64
 *.hex
+
 
 # Debug files
 *.dSYM/
