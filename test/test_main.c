@@ -36,10 +36,13 @@ int		main(int argc, char **argv)
 			tetriminoes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
 			tetriminoes = get_tetriminoes(data, tetriminoes);
 			i = 0;
-			while (tetriminoes[i])
+			if (advanced_validate(tetriminoes))
 			{
-				ft_putstr(tetriminoes[i++]);
-				ft_putstr("\n");
+				while (tetriminoes[i])
+				{
+					ft_putstr(tetriminoes[i++]);
+					ft_putstr("\n");
+				}
 			}
 		}
 		argc--;
