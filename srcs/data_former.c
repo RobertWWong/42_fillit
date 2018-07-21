@@ -12,7 +12,7 @@
 
 #include "../includes/tetrimino.h"
 
-t_vertex	*find_upper_vertex(char **tetro, t_vertex *upper)
+t_point	*find_upper_point(char **tetro, t_point *upper)
 {
 	int		i;
 	int		j;
@@ -25,7 +25,7 @@ t_vertex	*find_upper_vertex(char **tetro, t_vertex *upper)
 		{
 			if (tetro[i][j] == '#')
 			{
-				upper = (t_vertex *)malloc(sizeof(t_vertex));
+				upper = (t_point *)malloc(sizeof(t_point));
 				upper->x = j;
 				upper->y = i;
 			}
@@ -36,7 +36,7 @@ t_vertex	*find_upper_vertex(char **tetro, t_vertex *upper)
 	return (upper);
 }
 
-t_vertex	*find_lower_vertex(char **tetro, t_vertex *lower)
+t_point	*find_lower_point(char **tetro, t_point *lower)
 {
 	int		i;
 	int		j;
@@ -49,7 +49,7 @@ t_vertex	*find_lower_vertex(char **tetro, t_vertex *lower)
 		{
 			if (tetro[i][j] == '#')
 			{
-				lower = (t_vertex *)malloc(sizeof(t_vertex));
+				lower = (t_point *)malloc(sizeof(t_point));
 				lower->x = j;
 				lower->y = i;
 			}
@@ -60,7 +60,7 @@ t_vertex	*find_lower_vertex(char **tetro, t_vertex *lower)
 	return (lower);
 }
 
-t_vertex	*find_left_vertex(char **tetro, t_vertex *left)
+t_point	*find_left_point(char **tetro, t_point *left)
 {
 	int		i;
 	int		j;
@@ -73,7 +73,7 @@ t_vertex	*find_left_vertex(char **tetro, t_vertex *left)
 		{
 			if (tetro[i][j] == '#')
 			{
-				left = (t_vertex *)malloc(sizeof(t_vertex));
+				left = (t_point *)malloc(sizeof(t_point));
 				left->x = j;
 				left->y = i;
 			}
@@ -84,7 +84,7 @@ t_vertex	*find_left_vertex(char **tetro, t_vertex *left)
 	return (left);
 }
 
-t_vertex	*find_right_vertex(char **tetro, t_vertex *right)
+t_point	*find_right_point(char **tetro, t_point *right)
 {
 	int		i;
 	int		j;
@@ -97,7 +97,7 @@ t_vertex	*find_right_vertex(char **tetro, t_vertex *right)
 		{
 			if (tetro[i][j] == '#')
 			{
-				right = (t_vertex *)malloc(sizeof(t_vertex));
+				right = (t_point *)malloc(sizeof(t_point));
 				right->x = j;
 				right->y = i;
 			}
@@ -117,10 +117,10 @@ t_tetrimino	*form_tetrimino(char *tetrimino)
 
 	tetro = ft_strsplit(tetrimino, '\n');
 	item = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-	item->upper = find_upper_vertex(tetro, item->upper);
-	item->lower = find_lower_vertex(tetro, item->lower);
-	item->left = find_left_vertex(tetro, item->left);
-	item->right = find_left_vertex(tetro, item->right);
+	item->upper = find_upper_point(tetro, item->upper);
+	item->lower = find_lower_point(tetro, item->lower);
+	item->left = find_left_point(tetro, item->left);
+	item->right = find_left_point(tetro, item->right);
 	item->height = item->lower->y - item->upper->y;
 	item->width = item->right->x - item->left->x;
 	return (item);

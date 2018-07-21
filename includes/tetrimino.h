@@ -32,20 +32,26 @@ char					**get_tetriminoes(char *data, char **tetriminoes);
 int						basic_validate(char *data);
 int						advanced_validate(char **tetriminoes);	//not used within data checker
 
-typedef struct			s_vertex
+typedef struct			s_point
 {
 	int					x;
 	int					y;
-}						t_vertex;
+}						t_point;
 
+/*
+struct will have height and width to help with board size
+it also contains an array of points, detailing it's location and shape to be
+no idea why we have a pointer to another tetrimino
+*/
 typedef struct			s_tetrimino
 {
 	int					height;
 	int					width;
-	t_vertex			*upper;
-	t_vertex			*lower;
-	t_vertex			*left;
-	t_vertex			*right;
+	t_point				points[4];
+	// t_point			*upper;
+	// t_point			*lower;
+	// t_point			*left;
+	// t_point			*right;
 	struct s_tetrimino	*next;
 }						t_tetrimino;
 

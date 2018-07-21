@@ -62,11 +62,11 @@ int		check_tetrimino(char *tetrimino)
 {
 	int		i;
 	int		j;
-	// int		map[4][4];
-	int 	*list;
+	int 	list[4];
+
 	i = 0;
 	j = 0;
-	list = (int *)malloc(sizeof(int) * 4);
+	ft_bzero((void*)list, 4);
 	while (j < 4 && tetrimino[i])
 	{
 		if (tetrimino[i] == '#' && i - 5 >= 0)
