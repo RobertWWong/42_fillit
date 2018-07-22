@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetrimino.h"
+#include "../includes/tetro.h"
 
-void		shift_all_points(t_tetrimino *item, int min, int max)
+void		shift_all_points(t_tetro *item, int min, int max)
 {
 	int i;
 
@@ -25,7 +25,7 @@ void		shift_all_points(t_tetrimino *item, int min, int max)
 	}
 }
 
-void		create_points(t_tetrimino *item, char **tetro)
+void		create_points(t_tetro *item, char **tetro)
 {
 	int i;
 	int j;
@@ -61,15 +61,15 @@ check rest of block to determine min row and col indexs
 also assign coordinates to these blocks
 subtract min row and col value from each point
 */
-t_tetrimino	*form_tetrimino(char *tetrimino)
+t_tetro	*form_tetro(char *tetro)
 {
-	char		**tetro;
+	char		**tetro_split;
 	int			i;
 	// int			height;		//never used
 	// int			width;
-	t_tetrimino	*item;
+	t_tetro	*item;
 
-	item = (t_tetrimino *)malloc(sizeof(t_tetrimino));
+	item = (t_tetro *)malloc(sizeof(t_tetro));
 	i = -1;
 	while (++i < 4)
 	{
@@ -77,8 +77,8 @@ t_tetrimino	*form_tetrimino(char *tetrimino)
 		item->points[i].y = 0;
 	}
 
-	tetro = ft_strsplit(tetrimino, '\n');
-	printf("our tetrio \n%s\n", tetrimino);
-	create_points(item, tetro);
+	tetro_split = ft_strsplit(tetro, '\n');
+	printf("our tetrio \n%s\n", tetro);
+	create_points(item, tetro_split);
 	return (item);
 }

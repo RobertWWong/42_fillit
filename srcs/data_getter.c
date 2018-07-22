@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetrimino.h"
+#include "../includes/tetro.h"
 
 /*
 ** Read 21 char bytes at a time from to a char buffer to determine the size
@@ -64,7 +64,7 @@ char	*get_data(char *file_name, char *data)
 }
 
 
-char	**get_tetriminoes(char *data, char **tetriminoes)
+char	**get_tetroes(char *data, char **tetroes)
 {
 	int		i;
 	int		j;
@@ -73,11 +73,11 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 	j = 0;
 	while (data[j])
 	{
-		tetriminoes[i] = ft_strnew(21);
-		ft_strncpy(tetriminoes[i], &data[j], 20);
+		tetroes[i] = ft_strnew(21);
+		ft_strncpy(tetroes[i], &data[j], 20);
 		i++;
 		j = j + 21;
 	}
-	tetriminoes[i] = NULL;
-	return (tetriminoes);
+	tetroes[i] = NULL;
+	return (tetroes);
 }

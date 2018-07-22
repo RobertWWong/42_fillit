@@ -5,15 +5,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct		s_tetrimino
+typedef struct		s_tetro
 {
 	int				dim_h_w[2];
 	char			**shape;
-}					t_tetrimino;
+}					t_tetro;
 
 typedef struct		s_board
 {
-	t_tetrimino	**tetro;
+	t_tetro	**tetro;
 	char			**board_state;
 	int				dimension[2];
 	int				area;

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetrimino.h"
+#include "../includes/tetro.h"
 
 int		main(int argc, char **argv)
 {
 	char	*data = NULL;
-	char	**tetriminoes = NULL;
+	char	**tetroes = NULL;
 	int		i;
 	int		lines;
 
@@ -32,20 +32,20 @@ int		main(int argc, char **argv)
 		else
 		{
 			lines = ft_strcount(data, '\n');
-			tetriminoes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
-			tetriminoes = get_tetriminoes(data, tetriminoes);
+			tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+			tetroes = get_tetroes(data, tetroes);
 			i = 0;
-			if (advanced_validate(tetriminoes))
+			if (advanced_validate(tetroes))
 			{
-				while (tetriminoes[i])
+				while (tetroes[i])
 				{
-					ft_putstr(tetriminoes[i++]);
+					ft_putstr(tetroes[i++]);
 					ft_putstr("\n");
 				}
-				t_tetrimino *test = malloc(sizeof(t_tetrimino)*1);
-				test = form_tetrimino(tetriminoes[0]);
-				test = form_tetrimino(tetriminoes[1]);
-				test = form_tetrimino(tetriminoes[2]);
+				t_tetro *test = malloc(sizeof(t_tetro)*1);
+				test = form_tetro(tetroes[0]);
+				test = form_tetro(tetroes[1]);
+				test = form_tetro(tetroes[2]);
 
 			}
 		}

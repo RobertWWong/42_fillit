@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetrimino.h                                        :+:      :+:    :+:   */
+/*   tetro.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,13 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TETRIMINO_H
-# define TETRIMINO_H
-# define LEFT [0,-1]
-# define RIGHT [0,1]
-# define UP [-1, 0]
-# define DOWN [1,0]
-# define DIR [LEFT, RIGHT, UP, DOWN]
+#ifndef TETRO_H
+# define TETRO_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -33,24 +28,24 @@ typedef struct			s_point
 /*
 struct will have height and width to help with board size
 it also contains an array of points, detailing it's location and shape to be
-no idea why we have a pointer to another tetrimino
+no idea why we have a pointer to another tetro
 
-NEED TO FREE TETRIMINO SOMETIME IN LIFE
+NEED TO FREE tetro SOMETIME IN LIFE
 */
-typedef struct			s_tetrimino
+typedef struct			s_tetro
 {
 	int					height;
 	int					width;
 	t_point				points[4];
-	struct s_tetrimino	*next;
-}						t_tetrimino;
+	struct s_tetro	*next;
+}						t_tetro;
 
 int						count_char(int file_desc);
 char					*get_data(char *file_name, char *data);
-char					**get_tetriminoes(char *data, char **tetriminoes);
+char					**get_tetroes(char *data, char **tetroes);
 int						basic_validate(char *data);
-int						advanced_validate(char **tetriminoes);	//not used within data checker
-t_tetrimino				*form_tetrimino(char *tetrimino);
+int						advanced_validate(char **tetroes);	//not used within data checker
+t_tetro				*form_tetro(char *tetro);
 
 
 
