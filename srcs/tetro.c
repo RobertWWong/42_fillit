@@ -6,22 +6,23 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 10:51:02 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/21 11:50:10 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/22 19:36:49 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/tetro.h"
 
-void		shift_all_points(t_tetro *item, int min, int max)
+void		shift_all_points(t_tetro *item, int min_row, int min_col)
 {
 	int i;
 
 	i = -1;
 	while (++i < 4)
 	{
-		(item->points[i]).x -= min;
-		(item->points[i]).y -= max;
-		// printf("our points row=%d  col=%d\n",(item->points[i]).x, (item->points[i]).y);
+		(item->points[i]).x -= min_row;
+		(item->points[i]).y -= min_col;
+		// printf("our points row=%d  col=%d\n",(item->points[i]).x,
+		// (item->points[i]).y);
 	}
 }
 
@@ -67,7 +68,7 @@ t_tetro		*form_tetro(char *tetro)
 	int			i;
 	// int			height;		//never used
 	// int			width;
-	t_tetro	*item;
+	t_tetro		*item;
 
 	item = (t_tetro *)malloc(sizeof(t_tetro));
 	i = -1;
@@ -95,7 +96,7 @@ void		print_tetro(t_tetro *tetro)
 {
 	int i;
 
-	
+
 	i = -1;
 	while (++i < 4)
 	{

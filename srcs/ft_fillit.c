@@ -6,7 +6,11 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:09:36 by zwang             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/07/23 10:14:24 by zwang            ###   ########.fr       */
+=======
+/*   Updated: 2018/07/22 19:16:34 by zwang            ###   ########.fr       */
+>>>>>>> 62eb049b5a25d4d0f8d8013364456fa25bfa5ebc
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +18,11 @@
 #include "../includes/file_ops.h"
 #include "../includes/tetro.h"
 
+<<<<<<< HEAD
 t_tetro		**create_tetro_list(char **tetro_strings, int tetro_cnt)
+=======
+t_tetro			**create_tetro_list(char **tetro_strings, int tetro_cnt)
+>>>>>>> 62eb049b5a25d4d0f8d8013364456fa25bfa5ebc
 {
 	static t_tetro	**tetro_list;
 	int				i;
@@ -27,6 +35,7 @@ t_tetro		**create_tetro_list(char **tetro_strings, int tetro_cnt)
 	return (tetro_list);
 }
 
+<<<<<<< HEAD
 int		count_tetroes(char **tetro_strings)
 {
 	int	i;
@@ -134,4 +143,6 @@ int			backtrack_map(t_board *board, int tetro_index)
 
 int			fill_square(char **tetro_strings)
 {
+=======
+>>>>>>> 62eb049b5a25d4d0f8d8013364456fa25bfa5ebc
 
