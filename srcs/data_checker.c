@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetro.h"
+#include "../includes/file_ops.h"
 
 int		check_block(char *data, int *i)
 {
@@ -87,6 +87,10 @@ int		check_tetro(char *tetro)
 	return (0);
 }
 
+/*
+Will check all tetro string
+return count of valid tetro in string
+return 0 if any tetro is invalid*/
 int		advanced_validate(char **tetroes)
 {
 	int		i;
@@ -100,5 +104,5 @@ int		advanced_validate(char **tetroes)
 			return (0);
 		i++;
 	}
-	return (1);
+	return (i);
 }

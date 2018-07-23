@@ -4,16 +4,11 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-typedef struct		s_tetro
-{
-	int				dim_h_w[2];
-	char			**shape;
-}					t_tetro;
+# include "tetro.h"
 
 typedef struct		s_board
 {
-	t_tetro	**tetro;
+	t_tetro			**tetro;
 	char			**board_state;
 	int				dimension[2];
 	int				area;
@@ -22,6 +17,7 @@ typedef struct		s_board
 int					solve_smallest_sq();
 int					backtrack_map();
 int					create_board();
-
+int					free_all_data(t_board *board);
+t_tetro				**create_tetro_list(char **tetro_strings, int tetro_cnt);
 
 #endif
