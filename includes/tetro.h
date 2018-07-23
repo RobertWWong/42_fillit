@@ -37,7 +37,6 @@ typedef struct			s_tetro
 	int					height;
 	int					width;
 	t_point				points[4];
-	struct s_tetro	*next;
 }						t_tetro;
 
 
