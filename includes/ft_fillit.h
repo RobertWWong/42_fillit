@@ -9,7 +9,6 @@
 
 typedef struct		s_board
 {
-	t_tetro			**tetro;
 	char			**board_state;
 	int				sq_len;
 	int				tetro_amt;
@@ -22,3 +21,4 @@ int					free_all_data(t_board *board);
 t_tetro				**create_tetro_list(char **tetro_strings, int tetro_cnt);
 
 #endif
+
