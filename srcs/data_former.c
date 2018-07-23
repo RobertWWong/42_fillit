@@ -21,7 +21,7 @@ void		shift_all_points(t_tetro *item, int min, int max)
 	{
 		(item->points[i]).x -= min;
 		(item->points[i]).y -= max;
-		printf("our points row=%d  col=%d\n",(item->points[i]).x, (item->points[i]).y);
+		// printf("our points row=%d  col=%d\n",(item->points[i]).x, (item->points[i]).y);
 	}
 }
 
@@ -78,7 +78,7 @@ t_tetro	*form_tetro(char *tetro)
 	}
 
 	tetro_split = ft_strsplit(tetro, '\n');
-	printf("our tetrio \n%s\n", tetro);
+	// printf("our tetrio \n%s\n", tetro);
 	create_points(item, tetro_split);
 	return (item);
 }

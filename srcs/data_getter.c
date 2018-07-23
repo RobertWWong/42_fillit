@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetro.h"
+#include "../includes/file_ops.h"
 
 /*
 ** Read 21 char bytes at a time from to a char buffer to determine the size
@@ -63,7 +63,8 @@ char	*get_data(char *file_name, char *data)
 	return (data);
 }
 
-
+/*
+Return a list of tetro string rep from the file buffer */
 char	**get_tetroes(char *data, char **tetroes)
 {
 	int		i;
