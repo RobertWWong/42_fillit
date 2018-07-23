@@ -10,29 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_sqrt(int nb)
+int			ft_sqrt(int	num)
 {
-	int front;
-	int back;
-	int mid;
-	int res;
+	float	x;
+	float	y;
+	float	e;
 
-	front = 1;
-	back = 46341;
-	res = 0;
-	mid = 0;
-	if (nb == 0 || nb == 1)
-		return (nb);
-	while (front <= back)
+	x = num;
+	y = 1;
+	e = 0.000001;
+	while (x - y > e)
 	{
-		mid = (front + back) / 2;
-		res = mid * mid;
-		if (res == nb)
-			return (mid);
-		if (res < nb)
-			front = mid + 1;
-		else if (res > nb)
-			back = mid - 1;
+		x = (x + y) / 2;
+		y = num / x;
 	}
-	return (0);
+	return ((int)x);
 }
