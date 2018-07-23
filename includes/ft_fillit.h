@@ -18,6 +18,6 @@ int					solve_smallest_sq();
 int					backtrack_map();
 int					create_board();
 int					free_all_data(t_board *board);
-
+t_tetro				**create_tetro_list(char **tetro_strings, int tetro_cnt);
 
 #endif

@@ -43,5 +43,6 @@ typedef struct			s_tetro
 
 t_tetro					*form_tetro(char *tetro);
 int						free_tetro(t_tetro *tetro);
+void 					print_tetro(t_tetro *tetro);
 
 #endif

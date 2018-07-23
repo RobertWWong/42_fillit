@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_former.c                                      :+:      :+:    :+:   */
+/*   tetro.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -61,7 +61,7 @@ check rest of block to determine min row and col indexs
 also assign coordinates to these blocks
 subtract min row and col value from each point
 */
-t_tetro	*form_tetro(char *tetro)
+t_tetro		*form_tetro(char *tetro)
 {
 	char		**tetro_split;
 	int			i;
@@ -81,4 +81,28 @@ t_tetro	*form_tetro(char *tetro)
 	// printf("our tetrio \n%s\n", tetro);
 	create_points(item, tetro_split);
 	return (item);
+}
+
+int			free_tetro(t_tetro *tetro)
+{
+	if (!tetro)
+		return (0);
+	free(tetro);
+	return (1);
+}
+
+void		print_tetro(t_tetro *tetro)
+{
+	int i;
+
+	
+	i = -1;
+	while (++i < 4)
+	{
+		ft_putstr(ft_itoa((tetro->points[i]).x));
+		ft_putchar(':');
+		ft_putstr(ft_itoa((tetro->points[i]).y));
+		ft_putstr("\n\n");
+	}
+	ft_putchar('\n');
 }

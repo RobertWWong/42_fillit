@@ -65,7 +65,10 @@ int				main(int argc, char **argv)
 	argv++;
 	if (argc >= 2)
 	{
-		tetro_list = get_input_to_tetro_list(*argv++, 1);
+		if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+			return (0);
+		print_tetro(tetro_list[0]);
+		argv++;
 		argc--;
 	}
 	return (0);
