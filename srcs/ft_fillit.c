@@ -139,23 +139,23 @@ void		increment_board_state(t_board *board)
 	return (board);
  */
 
-int			is_safe(t_board *board, t_tetro *tetro, t_point *pos)
+int			is_safe(t_board *board, t_tetro *tetro, t_point pos)
 {
 	int		i;
 
 	i = 0;
-	while (i < 4 && (tetro->points)[i].x + pos->x < board->sq_len &&
-			(tetro->points)[i].y + pos->y < board->sq_len)
+	while (i < 4 && (tetro->points)[i].x + pos.x < board->sq_len &&
+			(tetro->points)[i].y + pos.y < board->sq_len)
 	{
-		if (board->board_state[(tetro->points)[i].x + pos->x]
-				[(tetro->points)[i].y + pos->y] == '#')
+		if (board->board_state[(tetro->points)[i].x + pos.x]
+				[(tetro->points)[i].y + pos.y] == '#')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void		remove_or_add(t_board *board, t_tetro *tetro, t_point *pos,
+void		remove_or_add(t_board *board, t_tetro *tetro, t_point pos,
 				int	remove_add)
 {
 	int		i;
@@ -165,8 +165,8 @@ void		remove_or_add(t_board *board, t_tetro *tetro, t_point *pos,
 	c = (remove_add == 1) ? '#' : '.';
 	while (i < 4)
 	{
-		board->board_state[(tetro->points)[i].x + pos->x]
-			[(tetro->points)[i].y + pos->y] = c;
+		board->board_state[(tetro->points)[i].x + pos.x]
+			[(tetro->points)[i].y + pos.y] = c;
 		i++;
 	}
 }
@@ -175,21 +175,17 @@ int			backtrack_map(t_board *board,  int tetro_index)
 {
 	int		i;
 	int		j;
-	t_point	*pos;
+	t_point	pos;
 
-	pos = (t_point*)malloc(sizeof(t_point));
-//	pos->x = 0;
-//	pos->y = 0;
 	if (board->tetro_amt == 0)
 		return (1);
 	i = 0;
-	while (i < board->sq_len)
+	while (i < board->sq_len && !(j = 0))
 	{
-		j = 0;
 		while (j < board->sq_len)
 		{
-			pos->x = i;
-			pos->y = j;
+			pos.x = i;
+			pos.y = j;
 			if (is_safe(board, (board->tetro_list)[tetro_index], pos))
 			{
 				remove_or_add(board, (board->tetro_list)[tetro_index], pos, 1);

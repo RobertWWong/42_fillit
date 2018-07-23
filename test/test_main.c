@@ -52,6 +52,10 @@ static t_tetro	**get_input_to_tetro_list(char *filename, int debug)
 	return (NULL);
 }
 
+void use_point(t_point point)
+{
+	printf("Here are our points:\nx=%d\ny=%d\n\n", point.x, point.y );
+}
 
 int				main(int argc, char **argv)
 {
@@ -71,17 +75,26 @@ int				main(int argc, char **argv)
 
 		//let's increase our board
 		increment_board_state(board);
-		printf("\nnew board coming in!\n");
-		for (size_t i = 0; i < board->sq_len; i++) {
-			printf("%s\n", board->board_state[i]);
-		}
-
-
+		// printf("\nnew board coming in!\n");
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	printf("%s\n", board->board_state[i]);
+		// }
 
 
 		argv++;
 		argc--;
 	}
+
+	t_point point;
+	point.x = 2;
+	point.y = 3;
+
+	use_point(point);
+
+	point.x = 4;
+	point.y = 5;
+	use_point(point);
+
 
 // 	char **some_stuff = (char**)malloc(sizeof(char*)*5);
 // 	for (size_t i = 0; i < 4; i++) {
