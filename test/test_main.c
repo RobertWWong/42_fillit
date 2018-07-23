@@ -66,8 +66,8 @@ int				main(int argc, char **argv)
 			return (0);
 		// print_tetro(tetro_list[0]);
 		board = create_board(tetro_list);
-		printf("it's alive!\n");
-		printf("%d = len\n", board->sq_len );
+		// printf("it's alive!\n");
+		// printf("%d = len\n", board->sq_len );
 		for (size_t i = 0; i < board->sq_len; i++) {
 			// for (size_t j = 0; j < board->sq_len; j++) {
 			// 	printf("%s\n", );

@@ -24,33 +24,45 @@ t_tetro		**create_tetro_list(char **tetro_strings, int tetro_cnt)
 		return (NULL);
 	while (++i < tetro_cnt)
 		tetro_list[i] = form_tetro(tetro_strings[i]);
+	// printf("%d i value\n", i);;
+	tetro_list[i] = NULL;
 	return (tetro_list);
 }
 
-int		count_tetroes(char **tetro_strings)
+// int		count_tetroes(char **tetro_strings)
+// {
+// 	int	i;
+//
+// 	i = 0;
+// 	while (tetro_strings[i])
+// 		i++;
+// 	return (i);
+// }
+
+
+t_board		*create_board(t_tetro **tetro_list)
 {
-	int	i;
+	int		i;
+	int		j;
+	t_board	*board;
 
 	i = 0;
-	while (tetro_strings[i])
+	while (tetro_list[i])
 		i++;
-	return (i);
-}
-
-
-t_board		*create_board(char **tetroes, int size, int size_increase)
-{
-	t_board	*board;
-	char	**board_state;
-
-	board = (t_board *)malloc(sizeof(t_board));
-	board->tetro_amt = count_tetroes(tetroes);
-	if (size_increase)
-		board->sq_len = size + 1;
-	else
-		board->sq_len = ft_sqrt(board->tetro_amt * 4);
-	board_state = (char **)malloc(sizeof(char *) * board->sq_len + 1);
-	board->board_state = board_state;
+	board = malloc(sizeof(t_board));
+	board->tetroes = tetro_list;
+	board->tetro_amt = i;
+	board->sq_len = ft_sqrt((i * 4));
+	board->board_state = (char**)malloc(sizeof(char*) * board->sq_len + 1);
+	board->board_state[i] = NULL;
+	while ((i - 1) >= 0)
+		board->board_state[i-- - 1] = ft_strnew(board->sq_len);
+	while (i < board->sq_len && !(j = 0))
+	{
+		while (j < board->sq_len)
+			board->board_state[i][j++] = '.';
+		i++;
+	}
 	return (board);
 }
 
@@ -86,12 +98,15 @@ void		remove_or_add(t_board *board, t_tetro *tetro, t_point *pos,
 	}
 }
 
-int			backtrack_map(t_board *board, int tetro_index)
+int			backtrack_map(t_board *board, t_tetro **tetro_list, int tetro_index)
 {
 	int		i;
 	int		j;
 	t_point	*pos;
 
+	pos = (t_point*)malloc(sizeof(t_point) * 1);
+	pos->x = 0;
+	pos->y = 0;
 	if (board->tetro_amt == 0)
 		return (1);
 	i = 0;
@@ -105,7 +120,7 @@ int			backtrack_map(t_board *board, int tetro_index)
 			if (is_safe(board, tetro_list[tetro_index], pos))
 			{
 				remove_or_add(board, tetro_list[tetro_index], pos, 1);
-				if (backtrack_map(board, tetro_index + 1))
+				if (backtrack_map(board, tetro_list, tetro_index + 1))
 					return (1);
 				remove_or_add(board, tetro_list[tetro_index], pos, 0);
 			}
