@@ -33,9 +33,7 @@ no idea why we have a pointer to another tetro
 NEED TO FREE tetro SOMETIME IN LIFE
 */
 typedef struct			s_tetro
-{
-	int					height;
-	int					width;
+{                                
 	t_point				points[4];
 }						t_tetro;
 
