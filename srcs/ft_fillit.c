@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:09:36 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/23 11:35:00 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/23 15:10:30 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,48 @@ t_board		*create_board(t_tetro **tetro_list)
 /*
 Will free our board and then increase its size by one.
 */
-t_board		*increment_board(t_board *board)
+
+void		delete_board_state(t_board *board)
 {
-	char	**board_state;
+	char	**prev;
+	char	**curr;
+
+	prev = board->board_state;
+	while (*prev)
+	{
+		curr = prev + 1;
+		ft_strdel(prev);
+		prev = curr;
+	}
+	free(board->board_state);
+	board->board_state = NULL;
+}
+
+void		increment_board_state(t_board *board)
+{
+	char	**new_state;
+	int		i;
+	int		j;
+
+	delete_board_state(board);
+	board->sq_len += 1;
+	new_state = (char **)malloc(sizeof(char *) * (board->sq_len + 1));
+	i = 0;
+	while (i < board->sq_len)
+	{
+		new_state[i] = ft_strnew(board->sq_len + 1);
+		j = 0;
+		while (j < board->sq_len)
+			new_state[i][j++] = '.';
+		i++;
+	}
+	new_state[i] = NULL;
+	board->board_state = new_state;
+}
+
+/* rob board state
+ *
+ *	char	**board_state;
 	char	**next;
 	char	**board_temp;
 	int		i;
@@ -98,8 +137,7 @@ t_board		*increment_board(t_board *board)
 	board->board_state = board_temp;
 	board->sq_len += 1;
 	return (board);
-}
-
+ */
 
 int			is_safe(t_board *board, t_tetro *tetro, t_point *pos)
 {
@@ -168,20 +206,20 @@ int			backtrack_map(t_board *board,  int tetro_index)
 
 char		**fill_square(char **tetro_strings)
 {
-	// int		tetro_index;
-	// t_board	*board;
+	int		tetro_index;
+	t_board	*board;
 	t_tetro	**tetro_list;
 	int		tetro_cnt;
 
 	tetro_cnt = count_tetroes(tetro_strings);
-
 	tetro_list = create_tetro_list(tetro_strings, tetro_cnt);
-/*
-	board = create_board(tetro_list, tetro_cnt, 0, 0);
+	board = create_board(tetro_list);
 	tetro_index = 0;
 	while (!backtrack_map(board, tetro_index))
-		board = create_board(tetro_list, tetro_cnt, board->sq_len, 1);
-*/
-	// return (board->board_state);
-	return (char**)"not done";
+	{
+		delete_board_state(board);
+		increment_board_state(board);
+	}
+	return (board->board_state);
+	//return (char**)"not done";
 }

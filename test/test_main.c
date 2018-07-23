@@ -70,7 +70,7 @@ int				main(int argc, char **argv)
 		}
 
 		//let's increase our board
-		board = increment_board(board);
+		increment_board_state(board);
 		printf("\nnew board coming in!\n");
 		for (size_t i = 0; i < board->sq_len; i++) {
 			printf("%s\n", board->board_state[i]);
