@@ -6,11 +6,11 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 08:27:29 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/21 11:34:33 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/23 09:31:14 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetrimino.h"
+#include "../includes/file_ops.h"
 
 /*
 ** Read 21 char bytes at a time from to a char buffer to determine the size
@@ -63,8 +63,9 @@ char	*get_data(char *file_name, char *data)
 	return (data);
 }
 
-
-char	**get_tetriminoes(char *data, char **tetriminoes)
+/*
+Return a list of tetro string rep from the file buffer */
+char	**get_tetroes(char *data, char **tetroes)
 {
 	int		i;
 	int		j;
@@ -73,11 +74,11 @@ char	**get_tetriminoes(char *data, char **tetriminoes)
 	j = 0;
 	while (data[j])
 	{
-		tetriminoes[i] = ft_strnew(21);
-		ft_strncpy(tetriminoes[i], &data[j], 20);
+		tetroes[i] = ft_strnew(21);
+		ft_strncpy(tetroes[i], &data[j], 20);
 		i++;
 		j = j + 21;
 	}
-	tetriminoes[i] = NULL;
-	return (tetriminoes);
+	tetroes[i] = NULL;
+	return (tetroes);
 }

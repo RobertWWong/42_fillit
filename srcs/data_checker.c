@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetrimino.h"
+#include "../includes/file_ops.h"
 
 int		check_block(char *data, int *i)
 {
@@ -58,7 +58,7 @@ int		basic_validate(char *data)
 
 /*
 */
-int		check_tetrimino(char *tetrimino)
+int		check_tetro(char *tetro)
 {
 	int		i;
 	int		j;
@@ -67,17 +67,17 @@ int		check_tetrimino(char *tetrimino)
 	i = 0;
 	j = 0;
 	ft_bzero((void *)list, 4);
-	while (j < 4 && tetrimino[i])
+	while (j < 4 && tetro[i])
 	{
-		if (tetrimino[i] == '#' && i - 5 >= 0)
-			list[j] += (tetrimino[i - 5] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#' && i + 5 <= 19)
-			list[j] += (tetrimino[i + 5] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#' && i > 0)
-			list[j] += (tetrimino[i - 1] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#' && i < 19)
-			list[j] += (tetrimino[i + 1] == '#') ? 1 : 0;
-		if (tetrimino[i] == '#')
+		if (tetro[i] == '#' && i - 5 >= 0)
+			list[j] += (tetro[i - 5] == '#') ? 1 : 0;
+		if (tetro[i] == '#' && i + 5 <= 19)
+			list[j] += (tetro[i + 5] == '#') ? 1 : 0;
+		if (tetro[i] == '#' && i > 0)
+			list[j] += (tetro[i - 1] == '#') ? 1 : 0;
+		if (tetro[i] == '#' && i < 19)
+			list[j] += (tetro[i + 1] == '#') ? 1 : 0;
+		if (tetro[i] == '#')
 			j++;
 		i++;
 	}
@@ -87,18 +87,22 @@ int		check_tetrimino(char *tetrimino)
 	return (0);
 }
 
-int		advanced_validate(char **tetriminoes)
+/*
+Will check all tetro string
+return count of valid tetro in string
+return 0 if any tetro is invalid*/
+int		advanced_validate(char **tetroes)
 {
 	int		i;
 	int		sides;
 
 	sides = 0;
 	i = 0;
-	while (tetriminoes[i])
+	while (tetroes[i])
 	{
-		if (!check_tetrimino( tetriminoes[i]))
+		if (!check_tetro( tetroes[i]))
 			return (0);
 		i++;
 	}
-	return (1);
+	return (i);
 }
