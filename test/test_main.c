@@ -59,53 +59,47 @@ int				main(int argc, char **argv)
 	t_board	*board;
 
 	argv++;
-	if (argc >= 2)
+	if (argc >= 4)
 	{
 		// will return to us a list of tetro structs, else exit the program
 		if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
 			return (0);
-		// print_tetro(tetro_list[0]);
 		board = create_board(tetro_list);
-		// printf("it's alive!\n");
-		// printf("%d = len\n", board->sq_len );
-		for (size_t i = 0; i < board->sq_len; i++) {
-			// for (size_t j = 0; j < board->sq_len; j++) {
-			// 	printf("%s\n", );
-			// }
-			printf("%s\n", board->board_state[i]);
-		}
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	printf("%s\n", board->board_state[i]);
+		// }
 
 		argv++;
 		argc--;
 	}
 
-	// char **some_stuff = (char**)malloc(sizeof(char*)*5);
-	// for (size_t i = 0; i < 4; i++) {
-	// 	some_stuff[i] = ft_strnew(4);
-	// }
-	// for (size_t i = 0; i < 4; i++) {
-    //
-	// 	for (size_t j = 0; j < 4; j++) {
-	// 		some_stuff[i][j] = '.';
-	// 	}
-	// }
-    //
-	// for (size_t i = 0; i < 4; i++) {
-	// 	printf("%s\n", some_stuff[i]);
-	// }
-    //
-	// char **tmp = some_stuff;
-	// char **newTemp = tmp;
-    //
-	// for (size_t i = 0; i < 4; i++) {
-	// 	newTemp = tmp + 1;
-	// 	ft_strdel(tmp);
-	// 	tmp = newTemp;
-	// }
-	// printf("\nis it deleted?\n");
-	// for (size_t i = 0; i < 4; i++) {
-	// 	printf("%s\n", some_stuff[i]);
-	// }
+	char **some_stuff = (char**)malloc(sizeof(char*)*5);
+	for (size_t i = 0; i < 4; i++) {
+		some_stuff[i] = ft_strnew(4);
+	}
+	for (size_t i = 0; i < 4; i++) {
+
+		for (size_t j = 0; j < 4; j++) {
+			some_stuff[i][j] = '.';
+		}
+	}
+
+	for (size_t i = 0; i < 4; i++) {
+		printf("%s\n", some_stuff[i]);
+	}
+
+	char **tmp = some_stuff;
+	char **newTemp = tmp;
+
+	for (size_t i = 0; i < 4; i++) {
+		newTemp = tmp + 1;
+		ft_strdel(tmp);
+		tmp = newTemp;
+	}
+	printf("\nis it deleted?\n");
+	for (size_t i = 0; i < 4; i++) {
+		printf("%s\n", some_stuff[i]);
+	}
 
 
 	return (0);

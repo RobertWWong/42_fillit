@@ -9,7 +9,7 @@
 
 typedef struct		s_board
 {
-	t_tetro			**tetroes;
+	t_tetro			**tetro_list;
 	char			**board_state;
 	int				sq_len;
 	int				tetro_amt;

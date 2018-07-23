@@ -24,7 +24,7 @@ int		count_tetroes(char **tetro_strings)
 	return (i);
 }
 
-t_tetro		**create_tetro_list(char **tetro_strings, int tetro_cnt)
+t_tetro			**create_tetro_list(char **tetro_strings, int tetro_cnt)
 {
 	t_tetro		**tetro_list;
 	int			i;
@@ -37,15 +37,18 @@ t_tetro		**create_tetro_list(char **tetro_strings, int tetro_cnt)
 	return (tetro_list);
 }
 
-t_board		*create_board(t_tetro **tetro_list, int tetro_cnt)
+t_board		*create_board(t_tetro **tetro_list)
 {
 	int		i;
 	int		j;
 	t_board	*board;
 	char	**board_state;
 
+	i = 0;
+	while (tetro_list[i])
+		i++;
 	board = (t_board *)malloc(sizeof(t_board));
-	board->tetro_amt = tetro_cnt; 
+	board->tetro_amt = i;
 	board->sq_len = ft_sqrt(board->tetro_amt * 4);
 	board->tetro_list = tetro_list;
 	board_state = (char **)malloc(sizeof(char *) * board->sq_len);
@@ -58,68 +61,38 @@ t_board		*create_board(t_tetro **tetro_list, int tetro_cnt)
 			board_state[i][j] = '.';
 	}
 	board->board_state = board_state;
-t_tetro		**create_tetro_list(char **tetro_strings, int tetro_cnt)
-{
-	static t_tetro	**tetro_list;
-	int				i;
-
-	i = -1;
-	if (!(tetro_list = malloc(sizeof(t_tetro*) * tetro_cnt + 1)))
-		return (NULL);
-	while (++i < tetro_cnt)
-		tetro_list[i] = form_tetro(tetro_strings[i]);
-	// printf("%d i value\n", i);;
-	tetro_list[i] = NULL;
-	return (tetro_list);
-}
-
-int		count_tetroes(char **tetro_strings)
-{
- 	int	i;
-
- 	i = 0;
- 	while (tetro_strings[i])
- 		i++;
- 	return (i);
-}
-
-t_board		*create_board(t_tetro **tetro_list)
-{
-	int		i;
-	int		j;
-	t_board	*board;
-
-	i = 0;
-	while (tetro_list[i])
-		i++;
-	board = malloc(sizeof(t_board));
-	board->tetroes = tetro_list;
-	board->tetro_amt = i;
-	board->sq_len = ft_sqrt((i * 4));
-	board->board_state = (char**)malloc(sizeof(char*) * board->sq_len + 1);
-	board->board_state[i] = NULL;
-	while ((i - 1) >= 0)
-		board->board_state[i-- - 1] = ft_strnew(board->sq_len);
-	while (i < board->sq_len && !(j = 0))
-	{
-		while (j < board->sq_len)
-			board->board_state[i][j++] = '.';
-		i++;
-	}
 	return (board);
 }
 
+
+/*
+Will free our board and then increase its size by one.
+*/
 t_board		*increment_board(t_board *board)
 {
 	char	**board_state;
+	char	**board_temp;
 	int		i;
 	int		j;
 
-	board_state = (char **)malloc(sizeof(char *) * (board->sq_len + 1));
+	board_state = board->board_state;
+	board_temp = (char**)malloc(sizeof(char*) * board->sq_len + 2);	//for one more + null
 	i = -1;
-	while (++i < board->sq_len + 1)
+	//allocate new board_state
+	//copy over board state
+	//free all pointers
+	//assign new board state
+	while (++i < board->sq_len)
 	{
+		board_temp[i] = ft_strnew(board->sq_len + 2);
+		board_temp[i] = ft_strcpy(board_temp[i], board->board_state[i]);
+		board_temp[i][board->sq_len + 1] = '.';
+
 		//need to implement
+
+	}
+	return (board);
+}
 
 
 int			is_safe(t_board *board, t_tetro *tetro, t_point *pos)
@@ -189,9 +162,12 @@ int			backtrack_map(t_board *board,  int tetro_index)
 
 char		**fill_square(char **tetro_strings)
 {
-	int		tetro_index;
+	// int		tetro_index;
+	// t_board	*board;
 	t_tetro	**tetro_list;
-	t_board	*board;
+	int		tetro_cnt;
+
+	tetro_cnt = count_tetroes(tetro_strings);
 
 	tetro_list = create_tetro_list(tetro_strings, tetro_cnt);
 /*
@@ -200,6 +176,6 @@ char		**fill_square(char **tetro_strings)
 	while (!backtrack_map(board, tetro_index))
 		board = create_board(tetro_list, tetro_cnt, board->sq_len, 1);
 */
-	return (board->board_state);
+	// return (board->board_state);
+	return (char**)"not done";
 }
-
