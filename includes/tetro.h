@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 09:45:28 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/22 19:08:39 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/22 20:09:29 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ NEED TO FREE tetro SOMETIME IN LIFE
 */
 typedef struct			s_tetro
 {
-	int					height;
-	int					width;
 	t_point				points[4];
-	struct s_tetro		*next;
 }						t_tetro;
 
 

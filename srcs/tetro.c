@@ -21,7 +21,7 @@ void		shift_all_points(t_tetro *item, int min_row, int min_col)
 	{
 		(item->points[i]).x -= min_row;
 		(item->points[i]).y -= min_col;
-		// printf("our points row=%d  col=%d\n",(item->points[i]).x, 
+		// printf("our points row=%d  col=%d\n",(item->points[i]).x,
 		// (item->points[i]).y);
 	}
 }
@@ -96,7 +96,7 @@ void		print_tetro(t_tetro *tetro)
 {
 	int i;
 
-	
+
 	i = -1;
 	while (++i < 4)
 	{
