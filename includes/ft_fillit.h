@@ -15,8 +15,7 @@ typedef struct		s_board
 	int				tetro_amt;
 }					t_board;
 
-int					solve_smallest_sq();
-int					backtrack_map();
+int					backtrack_map(t_board *board, int tetro_index);
 t_board				*create_board(t_tetro **tetro_list);
 int					free_all_data(t_board *board);
 t_tetro				**create_tetro_list(char **tetro_strings, int tetro_cnt);
