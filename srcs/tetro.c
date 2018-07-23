@@ -89,6 +89,7 @@ int			free_tetro(t_tetro *tetro)
 	if (!tetro)
 		return (0);
 	free(tetro);
+	tetro = NULL;
 	return (1);
 }
 
