@@ -14,43 +14,43 @@
 #include "../includes/file_ops.h"
 #include "../includes/ft_fillit.h"
 
-/*
-Read from a input file a map of tetro and return a list of tetroes
-or NULL if any validation checks fail
-*/
-static t_tetro	**get_input_to_tetro_list(char *filename, int debug)
-{
-	char	*data;
-	char	**tetroes;
-	int		tetro_cnt;
-	int		lines;
-
-	data = NULL;
-	tetroes = NULL;
-	if (!(data = get_data(filename, data)) || !basic_validate(data))
-	{
-		ft_putstr("Error\n");
-		return (NULL);
-	}
-	else
-	{
-		//count amount of lines in a file
-		lines = ft_strcount(data, '\n');
-		//Allocate spaces for a string array, with each string being a tetro
-		tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
-		//Get our list of tetro strings
-		tetroes = get_tetroes(data, tetroes);
-		//if all the tetro are valid, then we can create our lists
-		if ((tetro_cnt = advanced_validate(tetroes)))
-		{
-			int i = -1;
-			while (debug && ++i < tetro_cnt)
-				ft_putstr(ft_strcat(tetroes[i], "\n"));
-			return (create_tetro_list(tetroes, tetro_cnt));
-		}
-	}
-	return (NULL);
-}
+// /*
+// Read from a input file a map of tetro and return a list of tetroes
+// or NULL if any validation checks fail
+// */
+// static t_tetro	**get_input_to_tetro_list(char *filename, int debug)
+// {
+// 	char	*data;
+// 	char	**tetroes;
+// 	int		tetro_cnt;
+// 	int		lines;
+//
+// 	data = NULL;
+// 	tetroes = NULL;
+// 	if (!(data = get_data(filename, data)) || !basic_validate(data))
+// 	{
+// 		ft_putstr("Error\n");
+// 		return (NULL);
+// 	}
+// 	else
+// 	{
+// 		//count amount of lines in a file
+// 		lines = ft_strcount(data, '\n');
+// 		//Allocate spaces for a string array, with each string being a tetro
+// 		tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+// 		//Get our list of tetro strings
+// 		tetroes = get_tetroes(data, tetroes);
+// 		//if all the tetro are valid, then we can create our lists
+// 		if ((tetro_cnt = advanced_validate(tetroes)))
+// 		{
+// 			int i = -1;
+// 			while (debug && ++i < tetro_cnt)
+// 				ft_putstr(ft_strcat(tetroes[i], "\n"));
+// 			return (create_tetro_list(tetroes, tetro_cnt));
+// 		}
+// 	}
+// 	return (NULL);
+// }
 
 void use_point(t_point point)
 {
@@ -94,7 +94,8 @@ int				main(int argc, char **argv)
 			while ( ++i < tetro_cnt)
 				ft_putstr(ft_strcat(tetroes[i], "\n"));
 			char **res = NULL;
-			res = fill_square(tetroes);
+			if (!(res = fill_square(tetroes)))
+				return (0);
 			for (size_t i = 0; res[i]; i++) {
 				printf("%s\n", res[i]);
 			}
