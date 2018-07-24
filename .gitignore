@@ -57,3 +57,5 @@ dkms.conf
 
 libft.a
 fillit
+*.nsf*
+
