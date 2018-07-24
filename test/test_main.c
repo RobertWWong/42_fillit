@@ -14,69 +14,123 @@
 #include "../includes/file_ops.h"
 #include "../includes/ft_fillit.h"
 
-/*
-Read from a input file a map of tetro and return a list of tetroes
-or NULL if any validation checks fail
-*/
-static t_tetro	**get_input_to_tetro_list(char *filename, int debug)
+// /*
+// Read from a input file a map of tetro and return a list of tetroes
+// or NULL if any validation checks fail
+// */
+// static t_tetro	**get_input_to_tetro_list(char *filename, int debug)
+// {
+// 	char	*data;
+// 	char	**tetroes;
+// 	int		tetro_cnt;
+// 	int		lines;
+//
+// 	data = NULL;
+// 	tetroes = NULL;
+// 	if (!(data = get_data(filename, data)) || !basic_validate(data))
+// 	{
+// 		ft_putstr("Error\n");
+// 		return (NULL);
+// 	}
+// 	else
+// 	{
+// 		//count amount of lines in a file
+// 		lines = ft_strcount(data, '\n');
+// 		//Allocate spaces for a string array, with each string being a tetro
+// 		tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+// 		//Get our list of tetro strings
+// 		tetroes = get_tetroes(data, tetroes);
+// 		//if all the tetro are valid, then we can create our lists
+// 		if ((tetro_cnt = advanced_validate(tetroes)))
+// 		{
+// 			int i = -1;
+// 			while (debug && ++i < tetro_cnt)
+// 				ft_putstr(ft_strcat(tetroes[i], "\n"));
+// 			return (create_tetro_list(tetroes, tetro_cnt));
+// 		}
+// 	}
+// 	return (NULL);
+// }
+void 	del_str_arr(char **str)
 {
-	char	*data;
-	char	**tetroes;
-	int		tetro_cnt;
-	int		lines;
+		char **tmp = str;
+		char **newTemp = tmp;
 
-	data = NULL;
-	tetroes = NULL;
-	if (!(data = get_data(filename, data)) || !basic_validate(data))
-	{
-		ft_putstr("Error\n");
-		return (NULL);
-	}
-	else
-	{
-		//count amount of lines in a file
-		lines = ft_strcount(data, '\n');
-		//Allocate spaces for a string array, with each string being a tetro
-		tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
-		//Get our list of tetro strings
-		tetroes = get_tetroes(data, tetroes);
-		//if all the tetro are valid, then we can create our lists
-		if ((tetro_cnt = advanced_validate(tetroes)))
-		{
-			int i = -1;
-			while (debug && ++i < tetro_cnt)
-				ft_putstr(ft_strcat(tetroes[i], "\n"));
-			return (create_tetro_list(tetroes, tetro_cnt));
+		for (size_t i = 0; i < 4; i++) {
+			newTemp = tmp + 1;
+			ft_strdel(tmp);
+			tmp = newTemp;
 		}
-	}
-	return (NULL);
+		str = NULL;
 }
-
+void use_point(t_point point)
+{
+	//printf("Here are our points:\nx=%d\ny=%d\n\n", point.x, point.y );
+}
 
 int				main(int argc, char **argv)
 {
-	t_tetro	**tetro_list;
-	t_board	*board;
+	// t_tetro	**tetro_list;
+	// t_board	*board;
 
 	argv++;
 	if (argc >= 2)
 	{
-		// will return to us a list of tetro structs, else exit the program
-		if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+		char	*data;
+		char	**tetroes;
+		int		tetro_cnt;
+		int		lines;
+
+		data = NULL;
+		tetroes = NULL;
+		if (!(data = get_data(*argv, data)) || !basic_validate(data))
+		{
+			ft_putstr("error\n");
 			return (0);
-		board = create_board(tetro_list);
-		for (size_t i = 0; i < board->sq_len; i++) {
-			printf("%s\n", board->board_state[i]);
 		}
+		else
+		{
+			//count amount of lines in a file
+			lines = ft_strcount(data, '\n');
+			//Allocate spaces for a string array, with each string being a tetro
+			tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+			//Get our list of tetro strings
+			tetroes = get_tetroes(data, tetroes);
+
+			if ((tetro_cnt = advanced_validate(tetroes))< 1)
+			{
+				return (0);
+			}
+			// int i = -1;
+			//print our tetro pieces
+			// while ( ++i < tetro_cnt)
+			// 	ft_putstr(ft_strcat(tetroes[i], "\n"));
+			t_board *board = NULL;
+			if (!(board = fill_square(tetroes)))
+				return (0);
+//printf("\n\n");
+			print_board(board);
+			//printf("\n");
+			free_all_data(board);
+			del_str_arr(tetroes);
+
+
+		}
+
+		// will return to us a list of tetro structs, else exit the program
+		// if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+		// 	return (0);
+		// board = create_board(tetro_list);
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	//printf("%s\n", board->board_state[i]);
+		// }
 
 		//let's increase our board
-		increment_board_state(board);
-		printf("\nnew board coming in!\n");
-		for (size_t i = 0; i < board->sq_len; i++) {
-			printf("%s\n", board->board_state[i]);
-		}
-
-
+		// increment_board_state(board);
+		// //printf("\nnew board coming in!\n");
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	//printf("%s\n", board->board_state[i]);
+		// }
 
 
 		argv++;
@@ -95,7 +149,7 @@ int				main(int argc, char **argv)
 // 	}
 //
 // 	for (size_t i = 0; i < 4; i++) {
-// 		printf("%s\n", some_stuff[i]);
+// 		//printf("%s\n", some_stuff[i]);
 // 	}
 //
 // ///////////////////////////////////////////////////////
@@ -107,9 +161,9 @@ int				main(int argc, char **argv)
 // 		ft_strdel(tmp);
 // 		tmp = newTemp;
 // 	}
-// 	printf("\nis it deleted?\n");
+// 	//printf("\nis it deleted?\n");
 // 	for (size_t i = 0; i < 4; i++) {
-// 		printf("%s\n", some_stuff[i]);
+// 		//printf("%s\n", some_stuff[i]);
 // 	}
 //
 // ////////////////////////////// reassign some_stuf
@@ -120,9 +174,9 @@ int				main(int argc, char **argv)
 // 		some_stuff[i][j] = '#';
 // 	}
 // }
-// printf("\nNew matrix\n");
+// //printf("\nNew matrix\n");
 // for (size_t i = 0; i < 5; i++) {
-// 	printf("%s\n", some_stuff[i]);
+// 	//printf("%s\n", some_stuff[i]);
 // }
 
 
