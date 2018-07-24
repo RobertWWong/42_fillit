@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:09:36 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/23 17:16:35 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/24 12:26:50 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,33 @@ t_tetro			**create_tetro_list(char **tetro_strings, int tetro_cnt)
 	return (tetro_list);
 }
 
-//not for this low level thinking
-// t_board		*create_board(t_tetro **tetro_list)
-// {
-// 	int		i;
-// 	int		j;
-// 	t_board	*board;
-// 	char	**board_state;
-//
-// 	i = 0;
-// 	while (tetro_list[i])
-// 		i++;
-// 	board = (t_board *)malloc(sizeof(t_board));
-// 	board->tetro_amt = i;
-// 	board->sq_len = ft_sqrt(board->tetro_amt * 4);
-// 	board->tetro_list = tetro_list;
-// 	board_state = (char **)malloc(sizeof(char *) * board->sq_len + 1);
-// 	i = -1;
-// 	while (++i < board->sq_len)
-// 	{
-// 		board_state[i] = ft_strnew(board->sq_len + 1);
-// 		j = -1;
-// 		while (++j < board->sq_len)
-// 			board_state[i][j] = '.';
-// 	}
-// 	board_state[i] = NULL;
-// 	board->board_state = board_state;
-// 	return (board);
-// }
+t_board		*create_board(t_tetro **tetro_list)
+{
+	int		i;
+	int		j;
+	t_board	*board;
+	char	**board_state;
+
+	i = 0;
+	while (tetro_list[i])
+		i++;
+	board = (t_board *)malloc(sizeof(t_board));
+	board->tetro_amt = i;
+	board->sq_len = ft_sqrt(board->tetro_amt * 4);
+	board->tetro_list = tetro_list;
+	board_state = (char **)malloc(sizeof(char *) * board->sq_len + 1);
+	i = -1;
+	while (++i < board->sq_len)
+	{
+		board_state[i] = ft_strnew(board->sq_len + 1);
+		j = -1;
+		while (++j < board->sq_len)
+			board_state[i][j] = '.';
+	}
+	board_state[i] = NULL;
+	board->board_state = board_state;
+	return (board);
+}
 
 
 /*
@@ -77,14 +76,13 @@ void		delete_board_state(t_board *board)
 	char	**curr;
 
 	prev = board->board_state;
-	curr = prev + 1;
-	while (curr)
+	while (*prev)
 	{
-		free(prev);
-		curr = curr + 1;
+		curr = prev + 1;
+		ft_strdel(prev);
 		prev = curr;
 	}
-	free(prev);
+	free(board->board_state);
 	board->board_state = NULL;
 }
 
@@ -94,7 +92,9 @@ void		increment_board_state(t_board *board)
 	int		i;
 	int		j;
 
+	// printf("Deleting our board\n");
 	delete_board_state(board);
+	// printf("creating new board\n");
 	board->sq_len += 1;
 	new_state = (char **)malloc(sizeof(char *) * (board->sq_len + 1));
 	i = 0;
@@ -106,11 +106,12 @@ void		increment_board_state(t_board *board)
 			new_state[i][j++] = '.';
 		i++;
 	}
+	// printf("New state should be available now\n");
 	new_state[i] = NULL;
 	board->board_state = new_state;
 }
 
-/* rob board state 
+/* rob board state
  *
  *	char	**board_state;
 	char	**next;
@@ -121,78 +122,90 @@ void		increment_board_state(t_board *board)
 	board_state = board->board_state;
 	board_temp = (char**)malloc(sizeof(char*) * board->sq_len + 2);	//for one more + null
 	i = -1;
-	while (++i < board->sq_len && (j = -1) == -1)
+	while (++i < board->sq_len + 1)
 	{
-		printf("\n%d = sqlen\n", i);
 		next = (board_state + 1);	//get next string of board state
-		board_temp[i] = ft_strnew(board->sq_len + 2);	//make new str in temp
-		board_temp[i] = ft_strcpy(board_temp[i], board->board_state[i]); //cpy over old board
-		board_temp[i][board->sq_len] = '.';	//add extra . for the column
 		ft_strdel(board_state);	//deletes the current board state
 		board_state = next;
+		board_temp[i] = ft_strnew(board->sq_len + 2);	//make new str in temp
 	}
 	free(board->board_state);
 	board->board_state = (char**)malloc(sizeof(char*) * board->sq_len + 2);
 	board_temp[board->sq_len] = ft_strnew(board->sq_len + 2);
-	while (++j < board->sq_len)
-		board_temp[i - 1][j] = '.';
+	i = -1;
+	while ((++i < board->sq_len + 1) && (j = -1) == -1)
+		while (++j < board->sq_len + 1)
+			board_temp[i][j] = '.';
 	board_temp[board->sq_len] = NULL;
 	board->board_state = board_temp;
 	board->sq_len += 1;
-
 	return (board);
  */
 
-int			is_safe(t_board *board, t_tetro *tetro, t_point *pos)
+/*
+Don't need * pointer, just the */
+int			is_safe(t_board *board, t_tetro *tetro, t_point pos)
 {
 	int		i;
 
 	i = 0;
-	while (i < 4 && (tetro->points)[i].x + pos->x < board->sq_len &&
-			(tetro->points)[i].y + pos->y < board->sq_len)
+	while (i < 4)
 	{
-		if (board->board_state[(tetro->points)[i].x + pos->x]
-				[(tetro->points)[i].y + pos->y] == '#')
+		if ((tetro->points)[i].x + pos.x >= board->sq_len ||
+				(tetro->points)[i].y + pos.y >= board->sq_len)
+			return (0);
+		if (board->board_state[(tetro->points)[i].x + pos.x]
+				[(tetro->points)[i].y + pos.y] == 'A')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void		remove_or_add(t_board *board, t_tetro *tetro, t_point *pos,
+void		remove_or_add(t_board *board, t_tetro *tetro, t_point pos,
 				int	remove_add)
 {
 	int		i;
 	char	c;
 
 	i = 0;
-	c = (remove_add == 1) ? '#' : '.';
+	c = (remove_add == 1) ? 'A' : '.';
+
+	// for (int i = 0; i < board->sq_len; i++) {
+	// 	printf("board = %s     and strlen %zu\n", board->board_state[i], ft_strlen(board->board_state[i]));
+	// 	//it overridden the null character???
+	// }
 	while (i < 4)
 	{
-		board->board_state[(tetro->points)[i].x + pos->x]
-			[(tetro->points)[i].y + pos->y] = c;
+		board->board_state[(tetro->points)[i].x + pos.x]
+			[(tetro->points)[i].y + pos.y] = c;
 		i++;
 	}
+	printf("Done\n\n");
+
 }
 
 int			backtrack_map(t_board *board,  int tetro_index)
 {
 	int		i;
 	int		j;
-	t_point	*pos;
+	t_point	pos;
 
+	// printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
 	if (tetro_index == board->tetro_amt)
 		return (1);
 	i = 0;
-	while (i < board->sq_len)
+	while (i < board->sq_len && !(j = 0))
 	{
-		j = 0;
 		while (j < board->sq_len)
 		{
-			pos->x = i;
-			pos->y = j;
+			pos.x = i;
+			pos.y = j;
+			printf("sq_len = %d\n",board->sq_len );
+			//is safe isn't working correctly?
 			if (is_safe(board, (board->tetro_list)[tetro_index], pos))
 			{
+				printf("Passed is safe %d vs %d \n\n", pos.x, pos.y);
 				remove_or_add(board, (board->tetro_list)[tetro_index], pos, 1);
 				if (backtrack_map(board, tetro_index + 1))
 					return (1);
@@ -207,7 +220,7 @@ int			backtrack_map(t_board *board,  int tetro_index)
 
 char		**fill_square(char **tetro_strings)
 {
-	int		tetro_index;
+	static int		tetro_index;
 	t_board	*board;
 	t_tetro	**tetro_list;
 	int		tetro_cnt;
@@ -218,7 +231,6 @@ char		**fill_square(char **tetro_strings)
 	tetro_index = 0;
 	while (!backtrack_map(board, tetro_index))
 	{
-		delete_board_state(board);
 		increment_board_state(board);
 	}
 	return (board->board_state);

@@ -52,31 +52,70 @@ static t_tetro	**get_input_to_tetro_list(char *filename, int debug)
 	return (NULL);
 }
 
+void use_point(t_point point)
+{
+	printf("Here are our points:\nx=%d\ny=%d\n\n", point.x, point.y );
+}
 
 int				main(int argc, char **argv)
 {
-	t_tetro	**tetro_list;
-	t_board	*board;
+	// t_tetro	**tetro_list;
+	// t_board	*board;
 
 	argv++;
 	if (argc >= 2)
 	{
-		// will return to us a list of tetro structs, else exit the program
-		if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+		char	*data;
+		char	**tetroes;
+		int		tetro_cnt;
+		int		lines;
+
+		data = NULL;
+		tetroes = NULL;
+		if (!(data = get_data(*argv, data)) || !basic_validate(data))
+		{
+			ft_putstr("Error\n");
 			return (0);
-		board = create_board(tetro_list);
-		for (size_t i = 0; i < board->sq_len; i++) {
-			printf("%s\n", board->board_state[i]);
 		}
+		else
+		{
+			//count amount of lines in a file
+			lines = ft_strcount(data, '\n');
+			//Allocate spaces for a string array, with each string being a tetro
+			tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+			//Get our list of tetro strings
+			tetroes = get_tetroes(data, tetroes);
+
+			if ((tetro_cnt = advanced_validate(tetroes))< 1)
+			{
+				return (0);
+			}
+			int i = -1;
+			while ( ++i < tetro_cnt)
+				ft_putstr(ft_strcat(tetroes[i], "\n"));
+			char **res = NULL;
+			res = fill_square(tetroes);
+			for (size_t i = 0; res[i]; i++) {
+				printf("%s\n", res[i]);
+			}
+
+
+		}
+
+		// will return to us a list of tetro structs, else exit the program
+		// if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+		// 	return (0);
+		// board = create_board(tetro_list);
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	printf("%s\n", board->board_state[i]);
+		// }
 
 		//let's increase our board
-		board = increment_board(board);
-		printf("\nnew board coming in!\n");
-		for (size_t i = 0; i < board->sq_len; i++) {
-			printf("%s\n", board->board_state[i]);
-		}
-
-
+		// increment_board_state(board);
+		// printf("\nnew board coming in!\n");
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	printf("%s\n", board->board_state[i]);
+		// }
 
 
 		argv++;
