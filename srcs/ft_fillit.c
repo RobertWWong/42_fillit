@@ -14,6 +14,17 @@
 #include "../includes/file_ops.h"
 #include "../includes/tetro.h"
 
+void 	print_board(t_board *board)
+{
+	int i;
+
+	i = 0;
+	while (i < board->sq_len)
+	{
+		printf("%s\n", board->board_state[i++]);
+	}
+}
+
 int		count_tetroes(char **tetro_strings)
 {
 	int	i;
@@ -68,7 +79,7 @@ t_board		*create_board(t_tetro **tetro_list)
 
 
 /*
-Will free our board and then increase its size by one.
+Will free our board.
 */
 
 void		delete_board_state(t_board *board)
@@ -96,6 +107,7 @@ void		increment_board_state(t_board *board)
 	printf("Deleting our board\n");
 	delete_board_state(board);
 	printf("creating new board\n");
+
 	board->sq_len += 1;
 	new_state = (char **)malloc(sizeof(char *) * (board->sq_len + 1));
 	i = 0;
@@ -112,37 +124,6 @@ void		increment_board_state(t_board *board)
 	board->board_state = new_state;
 }
 
-/* rob board state
- *
- *	char	**board_state;
-	char	**next;
-	char	**board_temp;
-	int		i;
-	int		j;
-
-	board_state = board->board_state;
-	board_temp = (char**)malloc(sizeof(char*) * board->sq_len + 2);	//for one more + null
-	i = -1;
-	while (++i < board->sq_len + 1)
-	{
-		next = (board_state + 1);	//get next string of board state
-		ft_strdel(board_state);	//deletes the current board state
-		board_state = next;
-		board_temp[i] = ft_strnew(board->sq_len + 2);	//make new str in temp
-	}
-	free(board->board_state);
-	board->board_state = (char**)malloc(sizeof(char*) * board->sq_len + 2);
-	board_temp[board->sq_len] = ft_strnew(board->sq_len + 2);
-	i = -1;
-	while ((++i < board->sq_len + 1) && (j = -1) == -1)
-		while (++j < board->sq_len + 1)
-			board_temp[i][j] = '.';
-	board_temp[board->sq_len] = NULL;
-	board->board_state = board_temp;
-	board->sq_len += 1;
-	return (board);
- */
-
 /*
 Don't need * pointer, just the */
 int			is_safe(t_board *board, t_tetro *tetro, t_point pos)
@@ -154,7 +135,7 @@ int			is_safe(t_board *board, t_tetro *tetro, t_point pos)
 	{
 		if ((tetro->points)[i].x + pos.x >= board->sq_len ||(tetro->points)[i].y + pos.y >= board->sq_len)
 			return (0);
-		if (board->board_state[(tetro->points)[i].x + pos.x][(tetro->points)[i].y + pos.y] == 'A')
+		if (board->board_state[(tetro->points)[i].x + pos.x][(tetro->points)[i].y + pos.y] != '.')
 			return (0);
 		i++;
 	}
@@ -188,6 +169,7 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	int		j;
 	t_point	pos;
 
+	printf("sq_len = %d\n",board->sq_len );
 	// printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
 	if (tetro_index == board->tetro_amt)
 		return (1);
@@ -198,18 +180,16 @@ int			backtrack_map(t_board *board,  int tetro_index)
 		{
 			pos.x = i;
 			pos.y = j;
-			// printf("sq_len = %d\n",board->sq_len );
 			//is safe isn't working correctly?
 			if (is_safe(board, (board->tetro_list)[tetro_index], pos))
 			{
 
 				printf("Passed is safe %d vs %d \n\n", pos.x, pos.y);
-				printf("%s\n", board->board_state[0]);
 				remove_or_add(board, tetro_index, pos, 1);
+				print_board(board);
 				if (backtrack_map(board, tetro_index + 1))
 					return (1);
-
-					remove_or_add(board, tetro_index, pos, 0);
+				remove_or_add(board, tetro_index, pos, 0);
 			}
 			j++;
 		}
@@ -218,12 +198,28 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	return (0);
 }
 
+void 	free_all_data(t_board *board)
+{
+	int i;
+
+	i = 0;
+	delete_board_state(board);
+	while (i < board->tetro_amt)
+		free_tetro(board->tetro_list[i++]);
+	free(board->tetro_list);
+	board->tetro_list = NULL;
+	free(board);
+	board = NULL;
+}
+
+
 char		**fill_square(char **tetro_strings)
 {
 	static int		tetro_index;
 	t_board	*board;
 	t_tetro	**tetro_list;
 	int		tetro_cnt;
+	char 	**res;
 
 	tetro_cnt = count_tetroes(tetro_strings);
 	if (!(tetro_list = create_tetro_list(tetro_strings, tetro_cnt)))
@@ -237,6 +233,9 @@ char		**fill_square(char **tetro_strings)
 	{
 		increment_board_state(board);
 	}
-	return (board->board_state);
+	res = board->board_state;
+	// free_all_data(board);
+	printf("%s comeon \n\n", res[0]);
+	return (res);
 	//return (char**)"not done";
 }
