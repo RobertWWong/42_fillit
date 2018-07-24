@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/24 15:22:01 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/24 16:41:12 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ int		basic_validate(char *data)
 	{
 		if (!check_block(data, &i))
 			return (0);
-		if (!data[i])
+		if (!data[i] && data[i - 2] != '\n')
 			return (1);
 		if (data[i++] != '\n')
 			return (0);
 	}
+	if (data[i - 1] == '\n' && data[i - 2] == '\n')
+		return (0);
 	return (1);
 }
 
