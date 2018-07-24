@@ -21,8 +21,11 @@ void 	print_board(t_board *board)
 	i = 0;
 	while (i < board->sq_len)
 	{
-		printf("%s\n", board->board_state[i++]);
+		ft_putstr(board->board_state[i]);
+		ft_putchar('\n');
+		i++;
 	}
+	ft_putchar('\n');
 }
 
 int		count_tetroes(char **tetro_strings)
@@ -104,9 +107,9 @@ void		increment_board_state(t_board *board)
 	int		i;
 	int		j;
 
-	printf("Deleting our board\n");
+	//printf("Deleting our board\n");
 	delete_board_state(board);
-	printf("creating new board\n");
+	//printf("creating new board\n");
 
 	board->sq_len += 1;
 	new_state = (char **)malloc(sizeof(char *) * (board->sq_len + 1));
@@ -119,7 +122,7 @@ void		increment_board_state(t_board *board)
 			new_state[i][j++] = '.';
 		i++;
 	}
-	// printf("New state should be available now\n");
+	// //printf("New state should be available now\n");
 	new_state[i] = NULL;
 	board->board_state = new_state;
 }
@@ -159,7 +162,7 @@ void		remove_or_add(t_board *board, int tetro_index, t_point pos,
 			[(tetro->points)[i].y + pos.y] = c;
 		i++;
 	}
-	printf("Done\n\n");
+	//printf("Done\n\n");
 
 }
 
@@ -169,9 +172,9 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	int		j;
 	t_point	pos;
 
-	printf("sq_len = %d\n",board->sq_len );
-	// printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
-	if (tetro_index == board->tetro_amt)
+	//printf("sq_len = %d\n",board->sq_len );
+	// //printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
+	if (tetro_index >= board->tetro_amt)
 		return (1);
 	i = 0;
 	while (i < board->sq_len && !(j = 0))
@@ -184,9 +187,9 @@ int			backtrack_map(t_board *board,  int tetro_index)
 			if (is_safe(board, (board->tetro_list)[tetro_index], pos))
 			{
 
-				printf("Passed is safe %d vs %d \n\n", pos.x, pos.y);
+				//printf("Passed is safe %d vs %d \n\n", pos.x, pos.y);
 				remove_or_add(board, tetro_index, pos, 1);
-				print_board(board);
+				// print_board(board);
 				if (backtrack_map(board, tetro_index + 1))
 					return (1);
 				remove_or_add(board, tetro_index, pos, 0);
@@ -213,19 +216,18 @@ void 	free_all_data(t_board *board)
 }
 
 
-char		**fill_square(char **tetro_strings)
+t_board		*fill_square(char **tetro_strings)
 {
 	static int		tetro_index;
 	t_board	*board;
 	t_tetro	**tetro_list;
 	int		tetro_cnt;
-	char 	**res;
 
 	tetro_cnt = count_tetroes(tetro_strings);
 	if (!(tetro_list = create_tetro_list(tetro_strings, tetro_cnt)))
 		return (NULL);
 
-	printf("what is our tetro list?\n%d\n\n", tetro_list[0]->points->x);
+	//printf("what is our tetro list?\n%d\n\n", tetro_list[0]->points->x);
 
 	board = create_board(tetro_list);
 	tetro_index = 0;
@@ -233,9 +235,8 @@ char		**fill_square(char **tetro_strings)
 	{
 		increment_board_state(board);
 	}
-	res = board->board_state;
 	// free_all_data(board);
-	printf("%s comeon \n\n", res[0]);
-	return (res);
+	// //printf("%s comeon \n\n", res[0]);
+	return (board);
 	//return (char**)"not done";
 }

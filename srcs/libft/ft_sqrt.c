@@ -12,17 +12,20 @@
 
 int			ft_sqrt(int	num)
 {
-	float	x;
-	float	y;
-	float	e;
+	int racine;
+	int sqrt;
 
-	x = num;
-	y = 1;
-	e = 0.000001;
-	while (x - y > e)
+	racine = 1;
+	sqrt = 0;
+	while (racine <= num / 2)
 	{
-		x = (x + y) / 2;
-		y = num / x;
+		sqrt = racine * racine;
+		if (sqrt == num)
+		{
+			return (racine);
+		}
+		racine = racine + 1;
 	}
-	return ((int)x);
+	return (0);
+
 }
