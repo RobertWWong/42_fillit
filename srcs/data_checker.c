@@ -57,6 +57,8 @@ int		basic_validate(char *data)
 }
 
 /*
+Definitely need to recheck this process.
+Given a string rep of a tetro (including new line)
 */
 int		check_tetro(char *tetro)
 {
