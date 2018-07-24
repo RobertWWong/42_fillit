@@ -92,7 +92,9 @@ void		increment_board_state(t_board *board)
 	int		i;
 	int		j;
 
+	// printf("Deleting our board\n");
 	delete_board_state(board);
+	// printf("creating new board\n");
 	board->sq_len += 1;
 	new_state = (char **)malloc(sizeof(char *) * (board->sq_len + 1));
 	i = 0;
@@ -104,6 +106,7 @@ void		increment_board_state(t_board *board)
 			new_state[i][j++] = '.';
 		i++;
 	}
+	// printf("New state should be available now\n");
 	new_state[i] = NULL;
 	board->board_state = new_state;
 }
@@ -139,16 +142,20 @@ void		increment_board_state(t_board *board)
 	return (board);
  */
 
+/*
+Don't need * pointer, just the */
 int			is_safe(t_board *board, t_tetro *tetro, t_point pos)
 {
 	int		i;
 
 	i = 0;
-	while (i < 4 && (tetro->points)[i].x + pos.x < board->sq_len &&
-			(tetro->points)[i].y + pos.y < board->sq_len)
+	while (i < 4)
 	{
+		if ((tetro->points)[i].x + pos.x >= board->sq_len ||
+				(tetro->points)[i].y + pos.y >= board->sq_len)
+			return (0);
 		if (board->board_state[(tetro->points)[i].x + pos.x]
-				[(tetro->points)[i].y + pos.y] == '#')
+				[(tetro->points)[i].y + pos.y] == 'A')
 			return (0);
 		i++;
 	}
@@ -162,13 +169,20 @@ void		remove_or_add(t_board *board, t_tetro *tetro, t_point pos,
 	char	c;
 
 	i = 0;
-	c = (remove_add == 1) ? '#' : '.';
+	c = (remove_add == 1) ? 'A' : '.';
+
+	// for (int i = 0; i < board->sq_len; i++) {
+	// 	printf("board = %s     and strlen %zu\n", board->board_state[i], ft_strlen(board->board_state[i]));
+	// 	//it overridden the null character???
+	// }
 	while (i < 4)
 	{
 		board->board_state[(tetro->points)[i].x + pos.x]
 			[(tetro->points)[i].y + pos.y] = c;
 		i++;
 	}
+	printf("Done\n\n");
+
 }
 
 int			backtrack_map(t_board *board,  int tetro_index)
@@ -177,7 +191,8 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	int		j;
 	t_point	pos;
 
-	if (board->tetro_amt == 0)
+	// printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
+	if (tetro_index == board->tetro_amt)
 		return (1);
 	i = 0;
 	while (i < board->sq_len && !(j = 0))
@@ -186,13 +201,17 @@ int			backtrack_map(t_board *board,  int tetro_index)
 		{
 			pos.x = i;
 			pos.y = j;
+			printf("sq_len = %d\n",board->sq_len );
+			//is safe isn't working correctly?
 			if (is_safe(board, (board->tetro_list)[tetro_index], pos))
 			{
+				printf("Passed is safe %d vs %d \n\n", pos.x, pos.y);
 				remove_or_add(board, (board->tetro_list)[tetro_index], pos, 1);
 				if (backtrack_map(board, tetro_index + 1))
 					return (1);
-				remove_or_add(board, (board->tetro_list)[tetro_index], pos, 0);
-		}
+				else
+					remove_or_add(board, (board->tetro_list)[tetro_index], pos, 0);
+			}
 			j++;
 		}
 		i++;
@@ -202,7 +221,7 @@ int			backtrack_map(t_board *board,  int tetro_index)
 
 char		**fill_square(char **tetro_strings)
 {
-	int		tetro_index;
+	static int		tetro_index;
 	t_board	*board;
 	t_tetro	**tetro_list;
 	int		tetro_cnt;
@@ -213,7 +232,6 @@ char		**fill_square(char **tetro_strings)
 	tetro_index = 0;
 	while (!backtrack_map(board, tetro_index))
 	{
-		delete_board_state(board);
 		increment_board_state(board);
 	}
 	return (board->board_state);

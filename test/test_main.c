@@ -59,22 +59,59 @@ void use_point(t_point point)
 
 int				main(int argc, char **argv)
 {
-	t_tetro	**tetro_list;
-	t_board	*board;
+	// t_tetro	**tetro_list;
+	// t_board	*board;
 
 	argv++;
 	if (argc >= 2)
 	{
-		// will return to us a list of tetro structs, else exit the program
-		if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+		char	*data;
+		char	**tetroes;
+		int		tetro_cnt;
+		int		lines;
+
+		data = NULL;
+		tetroes = NULL;
+		if (!(data = get_data(*argv, data)) || !basic_validate(data))
+		{
+			ft_putstr("Error\n");
 			return (0);
-		board = create_board(tetro_list);
-		for (size_t i = 0; i < board->sq_len; i++) {
-			printf("%s\n", board->board_state[i]);
+		}
+		else
+		{
+			//count amount of lines in a file
+			lines = ft_strcount(data, '\n');
+			//Allocate spaces for a string array, with each string being a tetro
+			tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+			//Get our list of tetro strings
+			tetroes = get_tetroes(data, tetroes);
+
+			if ((tetro_cnt = advanced_validate(tetroes))< 1)
+			{
+				return (0);
+			}
+			int i = -1;
+			while ( ++i < tetro_cnt)
+				ft_putstr(ft_strcat(tetroes[i], "\n"));
+			char **res = NULL;
+			res = fill_square(tetroes);
+			for (size_t i = 0; res[i]; i++) {
+				printf("%s\n", res[i]);
+			}
+
+
 		}
 
+		// will return to us a list of tetro structs, else exit the program
+		// if (!(tetro_list = get_input_to_tetro_list(*argv, 1)))
+		// 	return (0);
+		// board = create_board(tetro_list);
+		// for (size_t i = 0; i < board->sq_len; i++) {
+		// 	printf("%s\n", board->board_state[i]);
+		// }
+
 		//let's increase our board
-		increment_board_state(board);
+		// increment_board_state(board);
 		// printf("\nnew board coming in!\n");
 		// for (size_t i = 0; i < board->sq_len; i++) {
 		// 	printf("%s\n", board->board_state[i]);
@@ -84,17 +121,6 @@ int				main(int argc, char **argv)
 		argv++;
 		argc--;
 	}
-
-	t_point point;
-	point.x = 2;
-	point.y = 3;
-
-	use_point(point);
-
-	point.x = 4;
-	point.y = 5;
-	use_point(point);
-
 
 // 	char **some_stuff = (char**)malloc(sizeof(char*)*5);
 // 	for (size_t i = 0; i < 4; i++) {
