@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:09:36 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/23 15:10:30 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/23 17:16:35 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,10 +181,7 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	int		j;
 	t_point	*pos;
 
-	pos = (t_point*)malloc(sizeof(t_point));
-//	pos->x = 0;
-//	pos->y = 0;
-	if (board->tetro_amt == 0)
+	if (tetro_index == board->tetro_amt)
 		return (1);
 	i = 0;
 	while (i < board->sq_len)
@@ -200,7 +197,7 @@ int			backtrack_map(t_board *board,  int tetro_index)
 				if (backtrack_map(board, tetro_index + 1))
 					return (1);
 				remove_or_add(board, (board->tetro_list)[tetro_index], pos, 0);
-		}
+			}
 			j++;
 		}
 		i++;
