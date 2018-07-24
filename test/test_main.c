@@ -51,7 +51,18 @@
 // 	}
 // 	return (NULL);
 // }
+void 	del_str_arr(char **str)
+{
+		char **tmp = str;
+		char **newTemp = tmp;
 
+		for (size_t i = 0; i < 4; i++) {
+			newTemp = tmp + 1;
+			ft_strdel(tmp);
+			tmp = newTemp;
+		}
+		str = NULL;
+}
 void use_point(t_point point)
 {
 	//printf("Here are our points:\nx=%d\ny=%d\n\n", point.x, point.y );
@@ -101,6 +112,7 @@ int				main(int argc, char **argv)
 			print_board(board);
 			//printf("\n");
 			free_all_data(board);
+			del_str_arr(tetroes);
 
 
 		}
