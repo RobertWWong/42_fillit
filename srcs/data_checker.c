@@ -55,20 +55,19 @@ int		basic_validate(char *data)
 		// printf("Here's our data and i s = \n%si=%d\n\n", data, i);
 		if (data[i] == '\n' && !data[i + 1])
 		{
-			printf("There is a newline character at the end of the file.");
+			// printf("There is a newline character at the end of the file.");
 			return (0);
 		}
 		else if (data[i] && data[i] != '\n')
 		{
-			printf("i = %d\n", i);
-			printf("There is no newline character between two blocks.");
+			// printf("i = %d\n", i);
+			// printf("There is no newline character between two blocks.");
 			return (0);
 		}
 		else if (!data[i])
 			return (1);
 		i++;
 		}
-	}
 	if (data[i - 1] == '\n' && data[i - 2] == '\n')
 		return (0);
 	return (1);

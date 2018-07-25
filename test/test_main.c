@@ -21,7 +21,7 @@ void 	del_str_arr(char **str)
 
 		for (size_t i = 0; i < 4; i++) {
 			newTemp = tmp + 1;
-			ft_strdel(tmp);
+			// ft_strdel(tmp);
 			tmp = newTemp;
 		}
 		str = NULL;
@@ -70,6 +70,7 @@ int		lets_fillit(char *file_name)
 
 		if ((tetro_cnt = advanced_validate(tetroes))< 1)
 		{
+			ft_putstr("error\n");
 			return (0);
 		}
 		t_board *board = NULL;
@@ -77,11 +78,11 @@ int		lets_fillit(char *file_name)
 			return (0);
 //printf("\n\n");
 		print_board(board);
-		printf("Done printing\n");
+		// printf("Done printing\n");
 		free_all_data(board);
-		printf("Done freeing board\n");
+		// printf("Done freeing board\n");
 		del_str_arr(tetroes);
-		printf("deleted string array\n");
+		// printf("deleted string array\n");
 
 	}
 	return (1);

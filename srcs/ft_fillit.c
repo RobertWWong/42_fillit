@@ -48,7 +48,7 @@ t_tetro			**create_tetro_list(char **tetro_strings, int tetro_cnt)
 		return (NULL);
 	while (++i < tetro_cnt)
 		tetro_list[i] = form_tetro(tetro_strings[i]);
-	printf("Tetroes we have now = %d\n\n", i);
+	// printf("Tetroes we have now = %d\n\n", i);
 	tetro_list[i] = NULL;
 	return (tetro_list);
 }
@@ -176,12 +176,12 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	int		j;
 	t_point	pos;
 
-	printf("tetro amt %d\n", board->tetro_amt);
-	printf("tetro index %d\n",tetro_index);
-	printf("sq_len =  %d\n",board->sq_len);
+	// printf("tetro amt %d\n", board->tetro_amt);
+	// printf("tetro index %d\n",tetro_index);
+	// printf("sq_len =  %d\n",board->sq_len);
 	if (tetro_index >= board->tetro_amt)
 	{
-		printf("We have found a solution\n\n");
+		// printf("We have found a solution\n\n");
 		return (1);
 	}
 	i = 0;
