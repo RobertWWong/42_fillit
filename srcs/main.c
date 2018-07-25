@@ -6,19 +6,20 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 16:24:19 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/24 16:41:48 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/24 16:47:48 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../includes/file_ops.h"
+
+int		check_tetro(char *tetro);
 
 int		main(int argc, char **argv)
 {
-	char	*s = "....\n....\n..##\n..##\n\n..#.\n..#.\n.##.\n....\n\n";
+	char	*s = "..#.\n....\n.##.\n.#..\n";
 	
 
-	printf("%d\n", basic_validate(s));
+	printf("%d\n", check_tetro(s));
 
 	return (0);
 }
