@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/25 13:39:31 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/25 14:16:13 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ int		basic_validate(char *data)
 				return (0);
 			}
 		// printf("Here's our data and i s = \n%si=%d\n\n", data, i);
-		if (!data[i] && data[i - 2] != '\n')
+		if (data[i] == '\n' && !data[i + 1])
 		{
-			printf("This dat ais null and two character back is not a null %c\n", data[i - 2]);
-			return (1);
-		}
-		if (data[i++] != '\n')
-		{
-			printf("The last character isn't null %c\n",data[i]);
+			printf("There is a newline character at the end of the file.");
 			return (0);
 		}
+		if (data[i] != '\n')
+		{
+			printf("There is no newline character between two blocks.");
+			return (0);
+		i++;
 	}
 	if (data[i - 1] == '\n' && data[i - 2] == '\n')
 		return (0);
