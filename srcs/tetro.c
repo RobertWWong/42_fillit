@@ -66,8 +66,6 @@ t_tetro		*form_tetro(char *tetro)
 {
 	char		**tetro_split;
 	int			i;
-	// int			height;		//never used
-	// int			width;
 	t_tetro		*item;
 
 	item = (t_tetro *)malloc(sizeof(t_tetro));

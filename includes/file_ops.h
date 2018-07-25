@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "libft.h"
 
 char					*get_data(char *file_name, char *data);

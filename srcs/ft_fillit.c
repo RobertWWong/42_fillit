@@ -175,12 +175,17 @@ int			backtrack_map(t_board *board,  int tetro_index)
 	//printf("sq_len = %d\n",board->sq_len );
 	// //printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
 	if (tetro_index >= board->tetro_amt)
+	{
+		// printf("We have found a solution\n\n");
 		return (1);
+	}
 	i = 0;
 	while (i < board->sq_len && !(j = 0))
 	{
+		// printf("tetro index %d\n",tetro_index);
 		while (j < board->sq_len)
 		{
+
 			pos.x = i;
 			pos.y = j;
 			//is safe isn't working correctly?
