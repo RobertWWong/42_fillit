@@ -128,6 +128,8 @@ int		advanced_validate(char **tetroes)
 	i = 0;
 	while (tetroes[i])
 	{
+		printf("%d = idx\n",i);
+		printf("our tetro\n%s", tetroes[i]);
 		if (!check_tetro( tetroes[i]))
 			return (0);
 		i++;
