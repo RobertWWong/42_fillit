@@ -48,11 +48,21 @@ int		basic_validate(char *data)
 	while (data[i])
 	{
 		if (!check_block(data, &i))
-			return (0);
+			{
+				printf("Failed at check block\n");
+				return (0);
+			}
+		// printf("Here's our data and i s = \n%si=%d\n\n", data, i);
 		if (!data[i] && data[i - 2] != '\n')
+		{
+			printf("This dat ais null and two character back is not a null %c\n", data[i - 2]);
 			return (1);
+		}
 		if (data[i++] != '\n')
+		{
+			printf("The last character isn't null %c\n",data[i]);
 			return (0);
+		}
 	}
 	if (data[i - 1] == '\n' && data[i - 2] == '\n')
 		return (0);
@@ -77,7 +87,7 @@ int		check_tetro(char *tetro)
 		list[k++] = 0;
 	while (j < 4 && tetro[i])
 	{
-		printf("%d\t%d\t%d\t%d\n", list[0], list[1], list[2], list[3]);
+		// printf("%d\t%d\t%d\t%d\n", list[0], list[1], list[2], list[3]);
 		if (tetro[i] == '#' && i - 5 >= 0)
 			list[j] += (tetro[i - 5] == '#') ? 1 : 0;
 
@@ -95,7 +105,7 @@ int		check_tetro(char *tetro)
 		i++;
 
 	}
-	printf("%d\t%d\t%d\t%d\n", list[0], list[1], list[2], list[3]);
+	// printf("%d\t%d\t%d\gettett%d\n", list[0], list[1], list[2], list[3]);
 	if (list[0] + list[1] + list[2] + list[3] >= 6)
 		return (1);
 	return (0);

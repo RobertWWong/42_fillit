@@ -31,6 +31,12 @@ void use_point(t_point point)
 	//printf("Here are our points:\nx=%d\ny=%d\n\n", point.x, point.y );
 }
 
+/*PROBLEM IN
+GET DATA
+and
+CHECK VALID
+
+MOSTLY WHEN GETTING STRING*/
 int		lets_fillit(char *file_name)
 {
 	char	*data;
@@ -40,11 +46,18 @@ int		lets_fillit(char *file_name)
 
 	data = NULL;
 	tetroes = NULL;
-	if (!(data = get_data(file_name, data)) || !basic_validate(data))
+	if (!(data = get_data(file_name, data)))
 	{
 		ft_putstr("error\n");
 		return (0);
 	}
+	printf("Here is our data\n%s",data);
+	if (!basic_validate(data))
+	{
+		ft_putstr("Failed at basic\n");
+		return (0);
+	}
+
 	else
 	{
 		//count amount of lines in a file
@@ -66,9 +79,8 @@ int		lets_fillit(char *file_name)
 		//printf("\n");
 		free_all_data(board);
 		del_str_arr(tetroes);
-
-
 	}
+	return (1);
 }
 
 int				main(int argc, char **argv)
