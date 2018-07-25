@@ -6,7 +6,7 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/25 14:16:13 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/25 15:18:14 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,14 @@ int		basic_validate(char *data)
 			printf("There is a newline character at the end of the file.");
 			return (0);
 		}
-		if (data[i] != '\n')
+		else if (data[i] && data[i] != '\n')
 		{
+			printf("i = %d\n", i);
 			printf("There is no newline character between two blocks.");
 			return (0);
+		}
+		else if (!data[i])
+			return (1);
 		i++;
 		}
 	}
