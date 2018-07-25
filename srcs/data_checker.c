@@ -6,11 +6,12 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 09:41:25 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/24 16:41:12 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/24 17:15:11 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/file_ops.h"
+#include <stdio.h>
 
 int		check_block(char *data, int *i)
 {
@@ -66,25 +67,35 @@ int		check_tetro(char *tetro)
 {
 	int		i;
 	int		j;
+	int		k;
 	int 	list[4];
 
 	i = 0;
 	j = 0;
-	ft_bzero((void *)list, 4);
+	k = 0;
+	while (k < 4)
+		list[k++] = 0;
 	while (j < 4 && tetro[i])
 	{
+		printf("%d\t%d\t%d\t%d\n", list[0], list[1], list[2], list[3]);
 		if (tetro[i] == '#' && i - 5 >= 0)
 			list[j] += (tetro[i - 5] == '#') ? 1 : 0;
+
 		if (tetro[i] == '#' && i + 5 <= 19)
 			list[j] += (tetro[i + 5] == '#') ? 1 : 0;
+
 		if (tetro[i] == '#' && i > 0)
 			list[j] += (tetro[i - 1] == '#') ? 1 : 0;
+
 		if (tetro[i] == '#' && i < 19)
 			list[j] += (tetro[i + 1] == '#') ? 1 : 0;
+
 		if (tetro[i] == '#')
 			j++;
 		i++;
+
 	}
+	printf("%d\t%d\t%d\t%d\n", list[0], list[1], list[2], list[3]);
 	if (list[0] + list[1] + list[2] + list[3] >= 6)
 		return (1);
 	return (0);
