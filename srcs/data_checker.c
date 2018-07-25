@@ -49,18 +49,18 @@ int		basic_validate(char *data)
 	{
 		if (!check_block(data, &i))
 			{
-				printf("Failed at check block\n");
+				// printf("Failed at check block\n");
 				return (0);
 			}
 		// printf("Here's our data and i s = \n%si=%d\n\n", data, i);
 		if (!data[i] && data[i - 2] != '\n')
 		{
-			printf("This dat ais null and two character back is not a null %c\n", data[i - 2]);
+			// printf("This dat ais null and two character back is not a null %c\n", data[i - 2]);
 			return (1);
 		}
 		if (data[i++] != '\n')
 		{
-			printf("The last character isn't null %c\n",data[i]);
+			// printf("The last character isn't null %c\n",data[i]);
 			return (0);
 		}
 	}

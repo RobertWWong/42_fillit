@@ -56,7 +56,7 @@ char	*get_data(char *file_name, char *data)
 		return (NULL);
 	}
 	close(file_desc);
-	printf("Size=%d \n\n",size);
+	// printf("Size=%d \n\n",size);
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
 		return (NULL);
 	data = (char *)malloc(sizeof(char) * (size + 1));

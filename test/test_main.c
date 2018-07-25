@@ -51,10 +51,11 @@ int		lets_fillit(char *file_name)
 		ft_putstr("error\n");
 		return (0);
 	}
-	printf("Here is our data\n%s",data);
+	// printf("Here is our data\n%s",data);
 	if (!basic_validate(data))
 	{
-		ft_putstr("Failed at basic\n");
+		ft_putstr("error\n");
+		// ft_putstr("Failed at basic\n");
 		return (0);
 	}
 
@@ -76,9 +77,12 @@ int		lets_fillit(char *file_name)
 			return (0);
 //printf("\n\n");
 		print_board(board);
-		//printf("\n");
+		printf("Done printing\n");
 		free_all_data(board);
+		printf("Done freeing board\n");
 		del_str_arr(tetroes);
+		printf("deleted string array\n");
+
 	}
 	return (1);
 }

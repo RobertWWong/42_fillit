@@ -44,10 +44,12 @@ t_tetro			**create_tetro_list(char **tetro_strings, int tetro_cnt)
 	int			i;
 
 	i = -1;
-	if (!(tetro_list = malloc(sizeof(t_tetro*) * tetro_cnt + 1)))
+	if (!(tetro_list = (t_tetro**)malloc(sizeof(t_tetro*) * tetro_cnt + 1)))
 		return (NULL);
 	while (++i < tetro_cnt)
 		tetro_list[i] = form_tetro(tetro_strings[i]);
+	printf("Tetroes we have now = %d\n\n", i);
+	tetro_list[i] = NULL;
 	return (tetro_list);
 }
 
@@ -166,23 +168,25 @@ void		remove_or_add(t_board *board, int tetro_index, t_point pos,
 
 }
 
+/*now have
+garbage value in my tetro for some reason.*/
 int			backtrack_map(t_board *board,  int tetro_index)
 {
 	int		i;
 	int		j;
 	t_point	pos;
 
-	//printf("sq_len = %d\n",board->sq_len );
-	// //printf("tetro index vs tetro amt %d vs %d\n\n", tetro_index, board->tetro_amt);
+	printf("tetro amt %d\n", board->tetro_amt);
+	printf("tetro index %d\n",tetro_index);
+	printf("sq_len =  %d\n",board->sq_len);
 	if (tetro_index >= board->tetro_amt)
 	{
-		// printf("We have found a solution\n\n");
+		printf("We have found a solution\n\n");
 		return (1);
 	}
 	i = 0;
 	while (i < board->sq_len && !(j = 0))
 	{
-		// printf("tetro index %d\n",tetro_index);
 		while (j < board->sq_len)
 		{
 
@@ -197,7 +201,8 @@ int			backtrack_map(t_board *board,  int tetro_index)
 				// print_board(board);
 				if (backtrack_map(board, tetro_index + 1))
 					return (1);
-				remove_or_add(board, tetro_index, pos, 0);
+				else
+					remove_or_add(board, tetro_index, pos, 0);
 			}
 			j++;
 		}
