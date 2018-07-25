@@ -6,20 +6,17 @@
 /*   By: zwang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 16:24:19 by zwang             #+#    #+#             */
-/*   Updated: 2018/07/24 16:47:48 by zwang            ###   ########.fr       */
+/*   Updated: 2018/07/25 13:12:21 by zwang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-
-int		check_tetro(char *tetro);
+#include "ft_fillit.h"
 
 int		main(int argc, char **argv)
 {
-	char	*s = "..#.\n....\n.##.\n.#..\n";
-	
+	char	*s = "..#.\n.#..\n.#..\n..#.\n";	
 
 	printf("%d\n", check_tetro(s));
-
 	return (0);
 }
