@@ -19,19 +19,20 @@
 int		count_char(int file_desc)
 {
 	int		size;
-	char	characters[22];
+	char	characters[600];
 
+	ft_strclr(characters);
 	size = 0;
-	while (read(file_desc, characters, 20) > 0)
+	if ((size = read(file_desc, characters, 547)) > 0)
 	{
-
-		size = size + 20;
-		if (read(file_desc, characters, 1) > 0)
-			size++;
-		else
-			return (size);
-		if (characters[0] != '\n')
-			return (-1);
+		return size;
+		// size = size + 20;
+		// if (read(file_desc, characters, 1) > 0)
+		// 	size++;
+		// else
+		// 	return (size);
+		// if (characters[0] != '\n')
+		// 	return (-1);
 	}
 	return (size);
 }
@@ -49,15 +50,17 @@ char	*get_data(char *file_name, char *data)
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
 		return (NULL);
 
-	if ((size = count_char(file_desc)) < 0)
+	if ((size = count_char(file_desc)) < 0 || size > 546)
 	{
 		close(file_desc);
 		return (NULL);
 	}
 	close(file_desc);
+	// printf("Size=%d \n\n",size);
 	if ((file_desc = open(file_name, O_RDONLY)) < 1)
 		return (NULL);
 	data = (char *)malloc(sizeof(char) * (size + 1));
+	data[size] = '\0';
 	if (read(file_desc, data, size) < 0)
 		return (NULL);
 	return (data);
@@ -65,14 +68,14 @@ char	*get_data(char *file_name, char *data)
 
 /*
 Return a list of tetro string rep from the file buffer */
-char	**get_tetroes(char *data, char **tetroes)
+char	**get_tetroes(char *data, char **tetroes, int tetro_amt)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	while (data[j])
+	while (data[j] && i < tetro_amt)
 	{
 		tetroes[i] = ft_strnew(21);
 		ft_strncpy(tetroes[i], &data[j], 20);

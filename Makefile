@@ -4,7 +4,8 @@ INCLUDE=includes
 CFLAGS =-I $(INCLUDE) -Wall -Wextra -Werror
 NAME = fillit
 MAIN_FILE = ./test/test_main.c
-SRC := $(filter-out main.c ,$(wildcard $(SRC_DIR)*.c))
+SRC := $(filter-out srcs/main.c ,$(wildcard $(SRC_DIR)*.c))
+# SRC := $(wildcard $(SRC_DIR)*.c)
 OBJ = $(patsubst srcs/%.c, %.o, $(SRC))
 BAD = $(wildcard input_files/errors/err*)
 GOOD = $(wildcard input_files/correct/val*)
@@ -37,7 +38,7 @@ nore:
 
 do: nore all
 
-	
+
 rerr:
 	gcc -g $(MAIN_FILE) $(OBJ) -L. -lft
 	./$(NAME) $(BAD)
@@ -46,5 +47,5 @@ rerr:
 rt:
 	gcc -g $(MAIN_FILE) $(OBJ) -o $(NAME) -L. -lft
 	./$(NAME) input_files/errors/error_9
-	./$(NAME)	input_files/correct/valid_12
+	./$(NAME) input_files/correct/valid_12
 .PHONY: clean fclean re
