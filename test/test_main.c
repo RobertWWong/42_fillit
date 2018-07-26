@@ -48,7 +48,7 @@ int		lets_fillit(char *file_name)
 	tetroes = NULL;
 	if (!(data = get_data(file_name, data)))
 	{
-		printf("Failed at get data\n");
+		// printf("Failed at get data\n");
 		ft_putstr("error\n");
 		return (0);
 	}
@@ -64,16 +64,18 @@ int		lets_fillit(char *file_name)
 	{
 		//count amount of lines in a file
 		lines = ft_strcount(data, '\n');
-		printf("our char count for the line %d\n", lines);
+		// printf("our char count for the line %d\n", lines);
 		//Allocate spaces for a string array, with each string being a tetro
-		tetroes = (char **)malloc(sizeof(char *) * (lines / 4 + 1));
+		tetroes = (char **)malloc(sizeof(char *) * (lines / 4) + 1);
+
+		// printf("What is our data? \n%s",data);
 		tetroes[lines/4] = NULL;
 		//Get our list of tetro strings
-		tetroes = get_tetroes(data, tetroes);
+		tetroes = get_tetroes(data, tetroes, (lines/4));
 
 		if ((tetro_cnt = advanced_validate(tetroes))< 1)
 		{
-			printf("Failed at adv validate\n");
+			// printf("Failed at adv validate\n");
 			ft_putstr("error\n");
 			return (0);
 		}

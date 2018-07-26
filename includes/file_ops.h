@@ -8,7 +8,7 @@
 # include "libft.h"
 
 char					*get_data(char *file_name, char *data);
-char					**get_tetroes(char *data, char **tetroes);
+char					**get_tetroes(char *data, char **tetroes, int tetro_amt);
 int						basic_validate(char *data);
 int						advanced_validate(char **tetroes);	//not used within data checker
 

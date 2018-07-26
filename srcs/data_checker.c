@@ -40,6 +40,7 @@ int		check_block(char *data, int *i)
 	return (1);
 }
 
+
 int		basic_validate(char *data)
 {
 	int		i;
@@ -48,11 +49,13 @@ int		basic_validate(char *data)
 	while (data[i])
 	{
 		if (!check_block(data, &i))
-			{
-				// printf("Failed at check block\n");
-				return (0);
-			}
+		{
+			// printf("Failed at check block\n");
+			return (0);
+		}
 		// printf("Here's our data and i s = \n%si=%d\n\n", data, i);
+
+		//if new line at end of file, no good, failed check
 		if (data[i] == '\n' && !data[i + 1])
 		{
 			// printf("There is a newline character at the end of the file.");
@@ -128,8 +131,8 @@ int		advanced_validate(char **tetroes)
 	i = 0;
 	while (tetroes[i])
 	{
-		printf("%d = idx\n",i);
-		printf("our tetro\n%s", tetroes[i]);
+		// printf("%d = idx\n",i);
+		// printf("our tetro\n%s", tetroes[i]);
 		if (!check_tetro( tetroes[i]))
 			return (0);
 		i++;
